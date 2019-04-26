@@ -9,6 +9,8 @@
   ],
   "rules": {
     "prettier": true,
-    "import-name": false
+    "import-name": false,
+    "function-name": false,
+    "variable-name": false
   }
 }

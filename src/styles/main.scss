@@ -8,15 +8,18 @@
   'vendor/reset';
 
 @import
+  'base/animations',
   'base/base',
   'base/typography',
   'base/utilities';
 
 @import
+  'layout/app',
   'layout/header';
 
-// @import
-//   'components/button';
+@import
+  'components/anchor',
+  'components/button';
 
 // @import
 //   'pages/landing',

@@ -1,0 +1,158 @@
+@import 'styles/abstracts/mixins';
+@import 'styles/abstracts/variables';
+@import 'styles/base/animations';
+
+.landing {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url(../../assets/img/landing-lg.svg);
+  background-color: $color-white;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 1rem 5rem;
+
+  @include responsive(sm) {
+    padding: 1rem 1.5rem;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo {
+      width: 15rem;
+
+      @include responsive(sm) {
+        width: 10rem;
+      }
+    }
+
+    .anchor {
+
+      &__box {
+        box-shadow: 0 2px 20px rgba($color-black, 0.3);
+      }
+
+      &:hover,
+      &:focus {
+        .anchor__box {
+          background-color: $color-white;
+          color: $color-primary;
+        }
+      }
+    }
+  }
+
+  &-center {
+    padding: 0 6rem;
+
+    &__message {
+      margin-bottom: 4rem;
+
+      @include responsive(sm) {
+        // marginbo
+      }
+    }
+
+    &__headline {
+      font-family: $font-dosis;
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    &__text {
+      font-size: 1.4rem;
+      color: $color-grey-light;
+      margin: 0.3rem 0;
+
+      @include responsive(sm) {
+        margin-top: 0;
+      }
+    }
+
+    &-signup {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .anchor {
+      font-size: 1.8rem;
+
+      &__box {
+        padding: 0.5rem 4rem;
+        background-color: $color-primary;
+        border: 1.5px solid $color-primary;
+        box-shadow: 0 2px 20px rgba($color-black, 0.3);
+        position: relative;
+        overflow: hidden;
+
+        &:hover .anchor__text--visible {
+          transform: translateY(100%);
+        }
+
+        &:hover .anchor__text--invisible {
+          top: 0;
+        }
+      }
+
+      &__text {
+
+        &>* {
+          display: inline-block;
+          text-align: center;
+          height: 100%;
+          width: 100%;
+          transition: all .2s;
+        }
+
+        &--invisible {
+          position: absolute;
+          padding: 0.5rem 4rem;
+          left: 0;
+          top: -100%;
+        }
+      }
+    }
+
+    @include responsive(lg) {
+      margin-bottom: -40vh;
+      padding: 0 auto;
+      text-align: center;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+
+    @include responsive(sm) {
+      font-size: 1rem;
+    }
+
+    &__corporate {
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        text-decoration: none;
+        color: $color-primary-lighter;
+      }
+
+      &-privacy {
+        margin-left: 3rem;
+      }
+    }
+  }
+
+  @include responsive(lg) {
+    background-image: url(../../assets/img/landing-sm.svg)
+  }
+}
