@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Anchor } from '../components';
 import '../styles/pages/landing.scss';
 import logo from '../assets/img/logo+name.png';
-import { Link } from 'react-router-dom';
 
 export class Landing extends Component {
   render() {
