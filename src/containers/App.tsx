@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import '../styles/main.scss';
+import '../styles/app.scss';
 
 import { Landing, Signup } from './';
 

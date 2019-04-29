@@ -15,11 +15,13 @@
 
 @import
   'layout/app',
-  'layout/header';
+  'layout/header',
+  'layout/footer';
 
 @import
   'components/anchor',
-  'components/button';
+  'components/button',
+  'components/form';
 
 // @import
 //   'pages/landing',

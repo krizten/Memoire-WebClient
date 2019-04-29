@@ -53,9 +53,7 @@
     &__message {
       margin-bottom: 4rem;
 
-      @include responsive(sm) {
-        // marginbo
-      }
+      @include responsive(sm) {}
     }
 
     &__headline {
@@ -126,30 +124,7 @@
     }
   }
 
-  &-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.2rem;
-
-    @include responsive(sm) {
-      font-size: 1rem;
-    }
-
-    &__corporate {
-      display: flex;
-      justify-content: space-between;
-
-      a {
-        text-decoration: none;
-        color: $color-primary-lighter;
-      }
-
-      &-privacy {
-        margin-left: 3rem;
-      }
-    }
-  }
+  &-footer {}
 
   @include responsive(lg) {
     background-image: url(../../assets/img/landing-sm.svg)

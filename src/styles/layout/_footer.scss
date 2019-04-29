@@ -1,0 +1,24 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+
+  @include responsive(sm) {
+    font-size: 1rem;
+  }
+
+  &__corporate {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      text-decoration: none;
+      color: $color-primary-lighter;
+    }
+
+    &-privacy {
+      margin-left: 3rem;
+    }
+  }
+}

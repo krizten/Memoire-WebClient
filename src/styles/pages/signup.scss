@@ -10,16 +10,26 @@
   padding: 1rem 5rem;
 
   &-header {
-    flex-basis: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo {
+      width: 15rem;
+
+      @include responsive(sm) {
+        width: 10rem;
+      }
+    }
   }
 
   &-main {
-    flex-grow: 1;
     display: flex;
 
     &__image {
       flex-basis: 40%;
-      padding: 2rem;
+      @include flexAbsCenter;
+      margin: 0 1rem;
 
       img {
         width: 100%;
@@ -27,24 +37,18 @@
     }
 
     &__form {
-
+      flex-grow: 1;
+      margin: 0 1rem;
     }
   }
 
   &-footer {
-    flex-basis: 5%;
+    .footer__corporate a {
+      color: $color-grey-light;
+    }
   }
 
   @include responsive(sm) {
     padding: 1rem 1.5rem;
-  }
-
-  .bg {
-    flex-basis: 80%;
-    background-image: url(../../assets/img/signup.png);
-    background-color: $color-white;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
   }
 }

@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 
-interface IAnchorComponent {
+interface Props {
   path: string;
   text: string;
 }
 
-export const Anchor: FunctionComponent<IAnchorComponent> = ({ path, text }) => {
+export const Anchor: FunctionComponent<Props> = ({ path, text }) => {
   return (
     <Link to={path} className="anchor">
       <div className="anchor__box">

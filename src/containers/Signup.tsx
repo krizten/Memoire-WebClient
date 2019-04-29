@@ -1,31 +1,133 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Footer, InputGroup, Button } from '../components';
 import '../styles/pages/signup.scss';
-import signup from '../assets/img/test-2.svg';
+import logo from '../assets/img/logo+name.png';
+import signup from '../assets/img/signup-lg.svg';
 
-export class Signup extends Component {
+interface State {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  acceptTerms: boolean;
+}
+
+export class Signup extends Component<State> {
+  state: State = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    acceptTerms: false,
+  };
+
+  onChange = (e: any) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  acceptTerms = (e: any) => {
+    this.setState({ [e.target.name]: e.target.checked });
+  };
+
+  onSubmit = (e: any) => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   render() {
+    const { name, email, password, confirmPassword, acceptTerms } = this.state;
+
     return (
       <div className="signup">
-        <div className="signup-header" />
+        <div className="signup-header">
+          <Link to="/">
+            <div>
+              <img className="signup-header__logo" src={logo} alt="Memoire Logo" />
+            </div>
+          </Link>
+        </div>
         <div className="signup-main">
           <div className="signup-main__image">
             <img src={signup} alt="Signup" />
           </div>
-          <div className="signup-main__form" />
+          <div className="signup-main__form form">
+            <div className="form__header">
+              <h3>Sign Up</h3>
+              <p>To get started, please complete the sign up form below.</p>
+            </div>
+            <div className="form__body">
+              <form className="register-form" id="register-form">
+                <InputGroup
+                  label="name"
+                  name="name"
+                  type="text"
+                  value={name}
+                  placeholder="Your Name"
+                  onChange={this.onChange}
+                />
+                <InputGroup
+                  label="email"
+                  name="email"
+                  type="email"
+                  value={email}
+                  placeholder="Your Email"
+                  onChange={this.onChange}
+                />
+                <InputGroup
+                  label="password"
+                  name="password"
+                  type="password"
+                  value={password}
+                  placeholder="Password"
+                  onChange={this.onChange}
+                />
+                <InputGroup
+                  label="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  value={confirmPassword}
+                  placeholder="Repeat your password"
+                  onChange={this.onChange}
+                />
+                <div className="form-group-container">
+                  <div className="form-group">
+                    <input
+                      type="checkbox"
+                      name="acceptTerms"
+                      id="acceptTerms"
+                      className="accept-terms"
+                      checked={acceptTerms}
+                      onChange={this.acceptTerms}
+                    />
+                    <label htmlFor="acceptTerms" className="label-accept-terms">
+                      <span>
+                        <span />
+                      </span>
+                      I agree with all statements in the{' '}
+                      <Link to="/terms-and-conditions">Terms of service</Link>
+                    </label>
+                  </div>
+                </div>
+                <div className="form-group-container">
+                  <div className="form-group form-button">
+                    <Button type="submit" name="signup" text="Register" onClick={this.onSubmit} />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div className="form__footer">
+              <p>
+                Already have an account?
+                <Link to="/login">
+                  <span>Sign in here</span>
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="signup-footer">
-          {/* <p className="landing-footer__copyright">&copy; Mémoire, 2019</p>
-          <div className="landing-footer__corporate">
-            <Link to="/terms-and-conditions">
-              <p className="landing-footer__corporate-terms">Terms & Conditions</p>
-            </Link>
-            <Link to="/privacy-policy">
-              <p className="landing-footer__corporate-privacy">Privacy Policy</p>
-            </Link>
-          </div> */}
-        </div>
+        <Footer className="signup-footer" />
       </div>
     );
   }
