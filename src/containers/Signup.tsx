@@ -112,7 +112,14 @@ export class Signup extends Component<State> {
                 </div>
                 <div className="form-group-container">
                   <div className="form-group form-button">
-                    <Button type="submit" name="signup" text="Register" onClick={this.onSubmit} />
+                    <Button
+                      type="submit"
+                      name="signup"
+                      text="Register"
+                      onClick={this.onSubmit}
+                      processing={false}
+                      disabled={false}
+                    />
                   </div>
                 </div>
               </form>

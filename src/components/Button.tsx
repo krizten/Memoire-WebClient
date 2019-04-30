@@ -5,6 +5,7 @@ interface Props {
   text: string;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
+  processing?: boolean;
   className?: string;
   onClick: MouseEventHandler<any>;
 }
@@ -15,6 +16,7 @@ export const Button: FunctionComponent<Props> = ({
   type = 'button',
   className,
   disabled = false,
+  processing = false,
   onClick,
 }) => {
   return (
@@ -26,6 +28,7 @@ export const Button: FunctionComponent<Props> = ({
       disabled={disabled}
     >
       {text}
+      {processing ? <i className="ml-3 fas fa-spinner fa-spin" /> : null}
     </button>
   );
 };

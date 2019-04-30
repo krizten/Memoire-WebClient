@@ -23,6 +23,18 @@
     transform: scale(1.02);
   }
 
+  &:disabled,
+  &[disabled] {
+    background-color: $color-primary-lighter;
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus {
+      transform: none;
+    }
+  }
+
+
   @include responsive(sm) {
     padding: 0.5rem 1.5rem;
   }
