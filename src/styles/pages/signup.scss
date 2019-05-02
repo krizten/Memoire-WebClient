@@ -2,7 +2,8 @@
 @import 'styles/abstracts/variables';
 
 .signup {
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,13 +27,25 @@
   &-main {
     display: flex;
 
+    @include responsive(lg) {
+      flex-direction: column;
+    }
+
     &__image {
       flex-basis: 40%;
       @include flexAbsCenter;
       margin: 0 1rem;
 
+      @include responsive(lg) {
+        order: 2;
+      }
+
       img {
         width: 100%;
+
+        @include responsive(lg) {
+          width: 70%;
+        }
       }
     }
 

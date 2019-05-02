@@ -4,6 +4,12 @@
   justify-content: space-between;
   align-items: center;
 
+  > div {
+    @include responsive(lg) {
+      width: 70%;
+    }
+  }
+
   &__header {
     h3 {
       text-align: center;
@@ -20,6 +26,10 @@
 
   &__body {
     margin: 4rem 0;
+
+    @include responsive(lg) {
+      margin: 2rem 0 0 0;
+    }
 
     .register-form {
       width: 100%;
@@ -50,6 +60,14 @@
 
   &__footer {
     font-size: 1.2rem;
+
+    @include responsive(lg) {
+      margin-bottom: 6rem;
+    }
+
+    @include responsive(sm) {
+      margin-bottom: 4rem;
+    }
 
     a {
       text-decoration: none;
@@ -113,6 +131,7 @@ input[type='checkbox']:not(old) {
   width: 2rem;
   margin: 0;
   padding: 0;
+  cursor: pointer;
   font-size: 1.5rem;
   display: none;
 }
@@ -121,6 +140,7 @@ input[type='checkbox']:not(old) + label {
   display: inline-block;
   line-height: 1.5rem;
   margin-top: 0.6rem;
+  cursor: pointer;
 }
 
 input[type='checkbox']:not(old) + label > span {
