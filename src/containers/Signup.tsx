@@ -14,21 +14,34 @@ interface State {
   acceptTerms: boolean;
 }
 
-export class Signup extends Component<State> {
+export class Signup extends Component<{}, State> {
   state: State = {
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
     acceptTerms: false,
+    // errors: {},
   };
 
   onChange = (e: any) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  acceptTerms = (e: any) => {
-    this.setState({ [e.target.name]: e.target.checked });
+    switch (e.target.name) {
+      case 'name':
+        this.setState({ name: e.target.value });
+        break;
+      case 'email':
+        this.setState({ email: e.target.value });
+        break;
+      case 'password':
+        this.setState({ password: e.target.value });
+        break;
+      case 'confirmPassword':
+        this.setState({ confirmPassword: e.target.value });
+        break;
+      case 'acceptTerms':
+        this.setState({ acceptTerms: e.target.checked });
+        break;
+    }
   };
 
   onSubmit = (e: any) => {
@@ -58,7 +71,7 @@ export class Signup extends Component<State> {
               <p>To get started, please complete the sign up form below.</p>
             </div>
             <div className="form__body">
-              <form className="register-form" id="register-form">
+              <form className="register-form" id="register-form" onSubmit={this.onSubmit}>
                 <InputGroup
                   label="name"
                   name="name"
@@ -99,7 +112,7 @@ export class Signup extends Component<State> {
                       id="acceptTerms"
                       className="accept-terms"
                       checked={acceptTerms}
-                      onChange={this.acceptTerms}
+                      onChange={this.onChange}
                     />
                     <label htmlFor="acceptTerms" className="label-accept-terms">
                       <span>

@@ -6,7 +6,7 @@
 
   > div {
     @include responsive(lg) {
-      width: 70%;
+      width: 80%;
     }
   }
 
@@ -63,6 +63,7 @@
 
     @include responsive(lg) {
       margin-bottom: 6rem;
+      text-align: center;
     }
 
     @include responsive(sm) {
@@ -179,6 +180,14 @@ textarea:focus {
   -webkit-box-shadow: none !important;
   -o-box-shadow: none !important;
   -ms-box-shadow: none !important;
+}
+
+input.has-error {
+  border-bottom: 1px solid $color-danger;
+}
+
+i.has-error {
+  color: $color-danger;
 }
 
 .accept-terms {

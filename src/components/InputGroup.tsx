@@ -23,9 +23,10 @@ export const InputGroup: FunctionComponent<Props> = ({
     <div className="form-group-container">
       <div className="form-group">
         <label htmlFor={label}>
-          <i className={cssStyle(name)} />
+          <i className={error ? `${cssStyle(name)} has-error` : cssStyle(name)} />
         </label>
         <input
+          className={error ? 'has-error' : ''}
           type={type}
           name={name}
           id={name}
