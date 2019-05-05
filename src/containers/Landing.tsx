@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Anchor } from '../components';
+import { Link } from 'react-router-dom';
+
+import { Anchor, Footer } from '../components';
 import '../styles/pages/landing.scss';
 import logo from '../assets/img/logo+name.png';
-import { Link } from 'react-router-dom';
 
 export class Landing extends Component {
   render() {
@@ -36,17 +37,7 @@ export class Landing extends Component {
             </Link>
           </div>
         </div>
-        <div className="landing-footer">
-          <p className="landing-footer__copyright">&copy; Mémoire, 2019</p>
-          <div className="landing-footer__corporate">
-            <Link to="/terms-and-conditions">
-              <p className="landing-footer__corporate-terms">Terms & Conditions</p>
-            </Link>
-            <Link to="/privacy-policy">
-              <p className="landing-footer__corporate-privacy">Privacy Policy</p>
-            </Link>
-          </div>
-        </div>
+        <Footer className="landing-footer" />
       </div>
     );
   }
