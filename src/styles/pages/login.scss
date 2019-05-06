@@ -52,6 +52,14 @@
     &__form {
       flex-grow: 1;
       margin: 0 1rem;
+
+      .forgot-password {
+        cursor: pointer;
+        color: $color-primary;
+        text-align: center;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
     }
   }
 
