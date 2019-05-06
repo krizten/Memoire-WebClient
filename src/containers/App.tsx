@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Landing, Signup } from './';
+import { Landing, Signup, Login } from './';
 import '../styles/app.scss';
 
 export class App extends Component {
@@ -12,6 +12,7 @@ export class App extends Component {
           <Switch>
             <Route exact={true} path="/" component={Landing} />
             <Route exact={true} path="/signup" component={Signup} />
+            <Route exact={true} path="/login" component={Login} />
           </Switch>
         </div>
       </Router>
