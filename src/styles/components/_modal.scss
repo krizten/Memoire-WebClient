@@ -10,10 +10,17 @@
 
   .modal {
     width: 40%;
-    // height: 40%;
     overflow: hidden;
     border-radius: 3px;
     background-color: rgba($color-white, 0.95);
+
+    @include responsive(lg) {
+      width: 60%;
+    }
+
+    @include responsive(sm) {
+      width: 80%;
+    }
 
     &__header {
       display: flex;
@@ -45,7 +52,7 @@
 
     &__body {
       padding: 2rem;
-      min-height: 10rem;
+      min-height: 8rem;
       // @include flexAbsCenter;
 
       &.form {

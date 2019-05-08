@@ -32,6 +32,10 @@ export class Login extends Component<{}, State> {
     }
   };
 
+  onSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
   showModal = () => {
     this.setState({ show: true });
   };
@@ -40,16 +44,14 @@ export class Login extends Component<{}, State> {
     this.setState({ show: false });
   };
 
-  onSubmit = (e: any) => {};
-
   forgotPasswordOnChange = (e: any) => {
     this.setState({
       forgotPasswordEmail: e.target.value,
     });
   };
 
-  forgotPasswordSubmit = () => {
-    console.log('Action button working');
+  forgotPasswordSubmit = (e: any) => {
+    e.preventDefault();
   };
 
   render() {
@@ -131,7 +133,7 @@ export class Login extends Component<{}, State> {
           id="forgotPassword"
           placeholder="Your Email"
           modalTitle="Forgot Password?"
-          instruction="Enter your email to initiate the password reset process."
+          instruction="Enter your email to initiate password reset process."
           value={forgotPasswordEmail}
           actionButtonText="Reset"
           actionButtonMethod={this.forgotPasswordSubmit}
