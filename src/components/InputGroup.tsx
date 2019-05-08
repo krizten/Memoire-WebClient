@@ -1,9 +1,10 @@
 import React, { FunctionComponent, ChangeEventHandler } from 'react';
 
 interface Props {
-  label: 'name' | 'email' | 'password' | 'confirmPassword';
-  name: 'name' | 'email' | 'password' | 'confirmPassword';
+  label: 'name' | 'email' | 'password' | 'confirmPassword' | string;
+  name: 'name' | 'email' | 'password' | 'confirmPassword' | string;
   type: 'text' | 'email' | 'password';
+  id?: string;
   placeholder: string;
   value: string;
   onChange: ChangeEventHandler<any>;
@@ -12,6 +13,7 @@ interface Props {
 
 export const InputGroup: FunctionComponent<Props> = ({
   label,
+  id,
   name,
   placeholder,
   type = 'text',
@@ -26,10 +28,10 @@ export const InputGroup: FunctionComponent<Props> = ({
           <i className={error ? `${cssStyle(name)} has-error` : cssStyle(name)} />
         </label>
         <input
-          className={error ? 'has-error' : ''}
+          className={error ? 'has-error' : undefined}
           type={type}
           name={name}
-          id={name}
+          id={id ? id : name}
           placeholder={placeholder}
           onChange={onChange}
           value={value}

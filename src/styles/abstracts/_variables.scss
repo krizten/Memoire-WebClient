@@ -13,8 +13,15 @@ $color-black: #000000;
 $color-white: #FFFFFF;
 
 // FONTS
-$font-open-sans: 'Open Sans', sans-serif;
-$font-montserrat: 'Montserrat', sans-serif;
-$font-roboto: 'Roboto', sans-serif;
-$font-dosis: 'Dosis', sans-serif;
+$font-open-sans: 'Open Sans',
+sans-serif;
+$font-montserrat: 'Montserrat',
+sans-serif;
+$font-roboto: 'Roboto',
+sans-serif;
+$font-dosis: 'Dosis',
+sans-serif;
 $font-size-default: 1.6rem;
+
+// Z-INDEXES
+$z-index-modal: 10;

@@ -1,0 +1,108 @@
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  @include flexAbsCenter;
+  background-color: rgba($color-black, 0.7);
+  z-index: $z-index-modal;
+
+  .modal {
+    width: 40%;
+    // height: 40%;
+    overflow: hidden;
+    border-radius: 3px;
+    background-color: rgba($color-white, 0.95);
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 2.5rem;
+      background-color: $color-grey-darker;
+      color: $color-white;
+
+      h1 {
+        display: inline-block;
+        font-family: $font-montserrat;
+        font-weight: 300;
+        font-size: 1.55rem;
+      }
+
+      span {
+        display: inline-block;
+        cursor: pointer;
+        font-size: 2.5rem;
+        font-weight: 500;
+        transition: 0.2s linear;
+
+        &:hover {
+          color: rgba($color-danger, 0.8);
+        }
+      }
+    }
+
+    &__body {
+      padding: 2rem;
+      min-height: 10rem;
+      // @include flexAbsCenter;
+
+      &.form {
+
+        .form__header {
+          font-size: 1.2rem;
+        }
+
+        .form__body {
+          margin: 2rem 0;
+          margin-bottom: 0;
+
+          input {
+            background-color: transparent;
+          }
+        }
+
+        .form__footer {
+          font-size: 1.1rem;
+        }
+
+      }
+
+
+    }
+
+    &__footer {
+      padding: 1rem;
+      text-align: right;
+    }
+
+    &__button {
+      padding: 0.5rem 2rem;
+      font-size: 1.25rem;
+      box-shadow: none;
+      transition: none;
+
+      &--action {
+        margin-left: 0.5rem;
+        border: 2px solid $color-grey-dark;
+        background-color: $color-grey-dark;
+        color: $color-white;
+
+        &:disabled,
+        &[disabled] {
+          background-color: lighten($color-grey-dark, 25%);
+          border: 2px solid lighten($color-grey-dark, 25%);
+        }
+      }
+
+      &--cancel {
+        margin-right: 0.5rem;
+        border: 2px solid $color-grey-dark;
+        background-color: $color-white;
+        color: $color-grey-dark;
+      }
+    }
+  }
+
+}
