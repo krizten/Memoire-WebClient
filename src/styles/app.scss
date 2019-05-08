@@ -1,27 +1,23 @@
 @charset 'UTF-8';
 
-@import
-  'abstracts/variables',
-  'abstracts/mixins';
+@import 'abstracts/variables',
+'abstracts/mixins';
 
-@import
-  'vendor/reset';
+@import 'vendor/reset';
 
-@import
-  'base/animations',
-  'base/base',
-  'base/typography',
-  'base/utilities';
+@import 'base/animations',
+'base/base',
+'base/typography',
+'base/utilities';
 
-@import
-  'layout/app',
-  'layout/header',
-  'layout/footer';
+@import 'layout/app',
+'layout/header',
+'layout/footer';
 
-@import
-  'components/anchor',
-  'components/button',
-  'components/form';
+@import 'components/anchor',
+'components/button',
+'components/form',
+'components/modal';
 
 // @import
 //   'pages/landing',

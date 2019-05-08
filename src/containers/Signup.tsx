@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Footer, InputGroup, Button } from '../components';
 import '../styles/pages/signup.scss';
 import logo from '../assets/img/logo+name.png';
-import signup from '../assets/img/signup-lg.svg';
+import signup from '../assets/img/signup.svg';
 
 interface State {
   name: string;
