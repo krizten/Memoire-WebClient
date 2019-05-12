@@ -26,7 +26,8 @@
 
   &__search {
     display: flex;
-    color: white;
+    color: $color-white;
+    width: 35rem;
     background-color: rgba($color-grey-dark, 0.7);
     padding: 0.3rem 1rem;
     border-radius: 20px;
@@ -77,6 +78,7 @@
   }
 
   &__add-entry {
+    cursor: pointer;
     margin-left: 1.6rem;
     border-radius: 50%;
     background-color: rgba($color-grey-dark, 0.7);
@@ -91,6 +93,7 @@
 
   &__profile {
     margin-left: 6rem;
+    cursor: pointer;
 
     &-image {
       width: 4rem;

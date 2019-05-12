@@ -1,0 +1,14 @@
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+
+  &__sidenav {
+    flex-basis: 10%;
+  }
+
+  &__content {
+    flex-grow: 1;
+    background-color: lightgrey;
+  }
+}

@@ -6,11 +6,13 @@ import add from '../assets/img/add.svg';
 import search from '../assets/img/search.svg';
 import clear from '../assets/img/clear.svg';
 
-interface Props {}
+interface Props {
+  className?: string;
+}
 
-export const Header: FunctionComponent<Props> = () => {
+export const Header: FunctionComponent<Props> = ({ className }) => {
   return (
-    <header className="header">
+    <header className={className ? `${className} header` : 'header'}>
       <div className="header__left">
         <img className="header__logo" src={logo} alt="Logo" />
       </div>
