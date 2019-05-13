@@ -142,6 +142,6 @@
   &__viewer {
     flex-grow: 1;
     margin-left: 1rem;
-    background-color: rgba($color-grey-darker, 0.3);
+    background-color: $color-entry-selected;
   }
 }

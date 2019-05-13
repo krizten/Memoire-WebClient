@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import search from '../assets/img/search.svg';
 import clear from '../assets/img/clear.svg';
 import add from '../assets/img/add.svg';
-import { EntrySummary } from '../components';
+import { EntrySummary, EntryViewer } from '../components';
 
 interface State {}
 
@@ -52,7 +52,9 @@ export class Entries extends Component<{}, State> {
         </div>
         <div className="entries__main">
           <div className="entries__list">{this.sample()}</div>
-          <div className="entries__viewer">Entry Viewer</div>
+          <div className="entries__viewer">
+            <EntryViewer />
+          </div>
         </div>
       </div>
     );

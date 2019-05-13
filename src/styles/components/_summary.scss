@@ -1,8 +1,14 @@
-.entry-summary {
+.summary {
   display: flex;
   background-color: $color-entry;
   margin: 0.5rem 0;
   padding: 1rem;
+  cursor: pointer;
+  transition: background 0.2s linear;
+
+  &:hover {
+    background-color: rgba($color-entry, 0.5);
+  }
 
   &__date {
     flex-basis: 20%;
