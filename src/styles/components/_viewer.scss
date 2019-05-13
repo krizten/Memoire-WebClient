@@ -1,5 +1,12 @@
 .viewer {
   &__controls {
     background-color: $color-grey-light;
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: flex-end;
+
+    button:not(:first-child) {
+      margin-left: 2rem;
+    }
   }
 }

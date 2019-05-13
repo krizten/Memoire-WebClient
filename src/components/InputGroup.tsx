@@ -43,20 +43,14 @@ export const InputGroup: FunctionComponent<Props> = ({
 };
 
 const cssStyle = (name: string) => {
-  let cssClass: string;
-
   switch (name) {
     case 'name':
-      cssClass = 'zmdi zmdi-account material-icons-name';
-      return cssClass;
+      return 'zmdi zmdi-account material-icons-name';
     case 'email':
-      cssClass = 'zmdi zmdi-email';
-      return cssClass;
+      return 'zmdi zmdi-email';
     case 'password':
-      cssClass = 'zmdi zmdi-lock';
-      return cssClass;
+      return 'zmdi zmdi-lock';
     case 'confirmPassword':
-      cssClass = 'zmdi zmdi-lock-outline';
-      return cssClass;
+      return 'zmdi zmdi-lock-outline';
   }
 };

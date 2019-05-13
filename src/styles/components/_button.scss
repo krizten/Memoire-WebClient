@@ -38,3 +38,26 @@
     padding: 1rem 2rem;
   }
 }
+
+.outline-button {
+  display: inline-flex;
+  align-items: center;
+  border: 0.5px solid $color-grey-dark;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  span {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+  }
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
