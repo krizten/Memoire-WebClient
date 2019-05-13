@@ -93,21 +93,42 @@
   &__list {
     flex-basis: 40%;
     margin-right: 0.5rem;
-
-    overflow-x: hidden;
-    overflow-y: auto;
+    padding-right: 0.5rem;
+    overflow: auto;
     height: 100%;
     max-height: 100%;
 
     &::-webkit-scrollbar {
-      visibility: hidden;
+      width: 8px;
     }
 
-    div {
-      background-color: rgba(skyblue, 0.3);
-      margin: 0.5rem 0;
-      padding: 1rem;
+    &::-webkit-scrollbar-thumb {
+      background-clip: content-box;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      box-shadow: inset 0 0 0 10px;
+    }
 
+    &::-webkit-scrollbar-button {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    &::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+
+    & {
+      color: #00000000;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #666666FF;
+      }
+    }
+
+    >div {
       &:first-child {
         margin-top: 0;
       }
@@ -121,6 +142,6 @@
   &__viewer {
     flex-grow: 1;
     margin-left: 1rem;
-    background-color: rgba(orangered, 0.3);
+    background-color: rgba($color-grey-darker, 0.3);
   }
 }

@@ -3,15 +3,21 @@ import React, { Component } from 'react';
 import search from '../assets/img/search.svg';
 import clear from '../assets/img/clear.svg';
 import add from '../assets/img/add.svg';
+import { EntrySummary } from '../components';
 
 interface State {}
 
 export class Entries extends Component<{}, State> {
   sample = () => {
     let group = [];
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < 20; index++) {
       group.push(
-        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus, culpa.</div>
+        <EntrySummary
+          key={index}
+          date={new Date('2018-01-22T03:24:00')}
+          title="Lorem ipsum dolor sit amet."
+          content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam quia temporibus atque fuga maxime recusandae ex voluptate ad nobis ipsamrofeds..."
+        />
       );
     }
     return group;
@@ -26,7 +32,13 @@ export class Entries extends Component<{}, State> {
               <button type="submit">
                 <img src={search} alt="Search icon" />
               </button>
-              <input id="search" name="search" type="text" placeholder="Search Entries..." />
+              <input
+                id="search"
+                name="search"
+                type="text"
+                placeholder="Search Entries..."
+                autoComplete="off"
+              />
               {!true && (
                 <button type="button">
                   <img src={clear} alt="Clear" />
