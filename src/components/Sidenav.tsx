@@ -34,12 +34,12 @@ export const Sidenav: FunctionComponent<Props> = ({ className }) => {
             <p>Settings</p>
           </div>
         </NavLink>
-        <NavLink to="/logout" className="sidenav__menu-link">
+        <a className="sidenav__menu-link logout">
           <div className="sidenav__menu-item">
             <LogoutSVG />
             <p>Logout</p>
           </div>
-        </NavLink>
+        </a>
       </div>
     </div>
   );

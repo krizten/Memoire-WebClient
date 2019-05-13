@@ -13,7 +13,7 @@ interface State {
   show: boolean;
 }
 
-export class Login extends Component<{}, State> {
+export class Login extends Component<{ history: any }, State> {
   state: State = {
     email: '',
     password: '',
@@ -34,6 +34,7 @@ export class Login extends Component<{}, State> {
 
   onSubmit = (e: any) => {
     e.preventDefault();
+    this.props.history.push('/entries');
   };
 
   showModal = () => {

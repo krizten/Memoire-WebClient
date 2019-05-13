@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import { Header, Sidenav } from '../components';
+import { Sidenav } from '../components';
+import { Entries, Page404 } from './';
 
 export class Main extends Component {
   render() {
     return (
       <div className="main">
         <Sidenav className="main__sidenav" />
-        <main className="main__content">Main Content</main>
+        <main className="main__content">
+          <Switch>
+            <Route exact={true} path="/entries" component={Entries} />
+            <Route component={Page404} />
+          </Switch>
+        </main>
       </div>
     );
   }
