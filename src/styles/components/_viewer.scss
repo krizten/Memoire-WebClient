@@ -1,12 +1,62 @@
 .viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+
   &__controls {
-    background-color: $color-grey-light;
+    background-color: lighten($color-grey-light, 43%);
     padding: 1rem 3rem;
+    border-radius: 1px;
     display: flex;
     justify-content: flex-end;
 
     button:not(:first-child) {
       margin-left: 2rem;
+    }
+  }
+
+  &__entry {
+    flex-grow: 1;
+    overflow: auto;
+
+    .entry {
+      padding: 1rem 3rem;
+      display: flex;
+      flex-direction: column;
+      background-color: $color-entry-selected;
+
+      &__date {
+        font-family: $font-dosis;
+        font-size: 1.3rem;
+        color: $color-grey-light;
+        margin: 0.5rem 0;
+      }
+
+      &__title {
+        font-family: $font-montserrat;
+        color: $color-primary;
+        font-weight: 600;
+        font-size: 2.5rem;
+        margin: 0.5rem 0 2rem;
+      }
+
+      &__content {
+        font-size: 1.2rem;
+        line-height: 1.7;
+
+        p {
+          margin: 2rem 0;
+
+          &:first-child {
+            margin-top: 0;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
     }
   }
 }

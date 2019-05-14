@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
+import { EntrySummary, EntryViewer } from '../components';
+import { AddSVG } from '../svg';
+
 import search from '../assets/img/search.svg';
 import clear from '../assets/img/clear.svg';
-import add from '../assets/img/add.svg';
-import { EntrySummary, EntryViewer } from '../components';
 
 interface State {}
 
@@ -47,11 +48,11 @@ export class Entries extends Component<{}, State> {
             </form>
           </div>
           <div className="entries__add">
-            <img src={add} alt="Add Entry" />
+            <AddSVG />
           </div>
         </div>
         <div className="entries__main">
-          <div className="entries__list">{this.sample()}</div>
+          <div className="entries__list scrollbar">{this.sample()}</div>
           <div className="entries__viewer">
             <EntryViewer />
           </div>
