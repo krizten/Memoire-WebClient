@@ -1,0 +1,142 @@
+.entries {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    background-color: $color-grey-dark;
+    display: flex;
+    align-items: center;
+    padding: 1rem 4rem;
+    margin-bottom: 0.5rem;
+    
+    @include responsive(sm) {
+      padding: 1rem 3rem;
+    }
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    color: $color-white;
+    width: 35rem;
+    background-color: rgba($color-grey-darker, 0.7);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+
+    form {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      button {
+        border: none;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        img {
+          width: 1.5rem;
+        }
+      }
+
+      input {
+        background-color: transparent;
+        border-bottom: none;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-family: $font-montserrat;
+
+        &::placeholder {
+          color: rgba($color-grey-light, 0.5);
+        }
+
+        &:focus {
+          color: $color-white;
+          border-bottom: none;
+
+          &::placeholder {
+            color: $color-grey-light;
+          }
+        }
+      }
+    }
+  }
+
+  &__add {
+    cursor: pointer;
+    margin-left: 1.6rem;
+    border-radius: 50%;
+    background-color: rgba($color-grey-darker, 0.7);
+    width: 3rem;
+    min-width: 3rem;
+    height: 3rem;
+    @include flexAbsCenter;
+
+    svg {
+      height: 1.2rem;
+      width: 1.2rem;
+      transition: all 0.15s ease-in;
+    }
+
+    &:hover {
+      svg {
+        fill: $color-primary-lighter;
+      }
+    }
+  }
+
+  &__main {
+    flex-grow: 1;
+    display: flex;
+    padding: 1rem;
+
+    @include responsive(sm) {
+      flex-direction: column;
+    }
+  }
+
+  &__list {
+    flex-basis: 40%;
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+    overflow: auto;
+    height: 100%;
+    max-height: 100%;
+
+    @include responsive(sm) {
+      flex-basis: auto;
+      max-height: 40rem;
+      margin-bottom: 1rem;
+      display: flex;
+    }
+
+    >div {
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__viewer {
+    flex-basis: 60%;
+    margin-left: 1rem;
+
+    @include responsive(sm) {
+      flex-basis: auto;
+    }
+  }
+}

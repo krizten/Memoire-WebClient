@@ -11,6 +11,8 @@ $color-grey-dark: #444444;
 $color-grey-light: #888888;
 $color-black: #000000;
 $color-white: #FFFFFF;
+$color-entry: #EFEEF1;
+$color-entry-selected: #FAF9FC;
 
 // FONTS
 $font-open-sans: 'Open Sans',
@@ -25,3 +27,4 @@ $font-size-default: 1.6rem;
 
 // Z-INDEXES
 $z-index-modal: 10;
+$z-index-menu-item: 5;

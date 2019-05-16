@@ -38,3 +38,39 @@
     padding: 1rem 2rem;
   }
 }
+
+.outline-button {
+  display: inline-flex;
+  align-items: center;
+  border: 0.5px solid $color-grey-dark;
+  border-radius: 3px;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  &:focus {
+    outline: none;
+  }
+
+  span {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+  }
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  &:hover,
+  &:focus {
+    border: 0.5px solid $color-grey-darker;
+    background-color: $color-grey-darker;
+    color: $color-white;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+}

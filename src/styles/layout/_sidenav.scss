@@ -1,0 +1,127 @@
+.sidenav {
+  background-color: $color-grey-darker;
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+
+  @include responsive(sm) {
+    flex-direction: row;
+  }
+
+  &__logo {
+    margin: 1rem auto 2rem;
+
+    @include responsive(sm) {
+      display: none;
+    }
+
+    img {
+      width: 5rem;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+
+    @include responsive(sm) {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__menu-link {
+    text-decoration: none;
+    color: $color-white;
+    padding: 1rem 6rem 1rem 2rem;
+    margin: 0.3rem 0;
+    position: relative;
+
+    @include responsive(sm) {
+      margin: 0;
+      width: 100%;
+      padding: 1rem;
+      @include flexAbsCenter;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {}
+  }
+
+  &__menu-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: $color-primary-gradient-finish;
+    transform: scaleY(0);
+    transition: transform .2s,
+      width 0.4s cubic-bezier(1, 0, 0, 1) .2s,
+      background-color .1s;
+  }
+
+  &__menu-link:hover::before {
+    transform: scaleY(1);
+    font-weight: 600;
+    width: 100%;
+  }
+
+  &__menu-link.active:hover::before {
+    background-color: transparent;
+    width: 0;
+  }
+
+  &__menu-item {
+    display: flex;
+    align-items: center;
+
+    @include responsive(sm) {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    >* {
+      z-index: $z-index-menu-item;
+    }
+
+    p {
+      font-family: $font-montserrat;
+      font-weight: 500;
+      font-size: 1.4rem;
+      transition: all 0.1s linear;
+
+      @include responsive(sm) {
+        font-size: 1.2rem;
+      }
+    }
+
+    svg {
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-right: 2rem;
+
+      @include responsive(sm) {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+
+  .active {
+    background: linear-gradient(to right, $color-primary-gradient-start, $color-primary-gradient-finish);
+
+    &:hover {}
+  }
+
+  .logout {
+    cursor: pointer;
+  }
+}
