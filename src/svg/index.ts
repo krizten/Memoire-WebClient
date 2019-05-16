@@ -7,3 +7,4 @@ export * from './save';
 export * from './edit';
 export * from './cancel';
 export * from './delete';
+export * from './location';

@@ -26,11 +26,35 @@
       flex-direction: column;
       background-color: $color-entry-selected;
 
+      @include responsive(sm) {
+        padding: 1rem 1.5rem;
+      }
+
+      &__date-location {
+        display: flex;
+        justify-content: space-between;
+        color: $color-grey-light;
+      }
+
       &__date {
         font-family: $font-dosis;
         font-size: 1.3rem;
-        color: $color-grey-light;
         margin: 0.5rem 0;
+      }
+
+      &__location {
+        display: flex;
+        align-items: center;
+
+        svg {
+          fill: currentColor;
+          width: 2rem;
+          height: 2rem;
+        }
+
+        span {
+          margin-left: 1rem;
+        }
       }
 
       &__title {
@@ -44,6 +68,11 @@
       &__content {
         font-size: 1.2rem;
         line-height: 1.7;
+        color: $color-grey-darker;
+
+        @include responsive(sm) {
+          font-size: 1.3rem;
+        }
 
         p {
           margin: 2rem 0;
@@ -54,6 +83,19 @@
 
           &:last-child {
             margin-bottom: 0;
+          }
+        }
+      }
+
+      &__image {
+        text-align: center;
+
+        img {
+          width: 60%;
+          border-radius: 3px;
+
+          @include responsive(sm) {
+            width: 80%;
           }
         }
       }

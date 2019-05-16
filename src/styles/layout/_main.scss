@@ -2,13 +2,18 @@
   height: 100%;
   width: 100%;
   display: flex;
+  @include responsive(sm) {
+    display: block;
+  }
 
   &__sidenav {
     flex-basis: 10%;
+    @include responsive(sm) {
+      display: block;
+    }
   }
 
   &__content {
     flex-grow: 1;
-    // background-color: lightgrey;
   }
 }
