@@ -1,0 +1,133 @@
+.editor {
+  display: flex;
+  height: 100%;
+  max-height: 100%;
+
+  &__main {
+    flex-grow: 1;
+    margin: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+
+    @include responsive(sm) {
+      margin: 1rem;
+    }
+  }
+
+  &__controls {
+    background-color: lighten($color-grey-light, 43%);
+    padding: 1rem 3rem;
+    border-radius: 1px;
+    display: flex;
+    justify-content: flex-end;
+
+    @include responsive(sm) {
+      padding: 1rem 2rem;
+    }
+
+    button:not(:first-child) {
+      margin-left: 2rem;
+    }
+  }
+
+  &__entry {
+    flex-grow: 1;
+    overflow: auto;
+
+    .entry {
+      height: 100%;
+      padding: 1rem 3rem;
+      display: flex;
+      flex-direction: column;
+      background-color: $color-entry-selected;
+
+      @include responsive(sm) {
+        padding: 1rem 1.5rem;
+      }
+
+      &__date-location {
+        display: flex;
+        justify-content: space-between;
+        color: $color-grey-light;
+      }
+
+      &__date {
+        font-family: $font-dosis;
+        font-size: 1.3rem;
+        margin: 0.5rem 0;
+      }
+
+      &__location {
+        display: flex;
+        align-items: center;
+
+        svg {
+          fill: currentColor;
+          width: 2rem;
+          height: 2rem;
+        }
+
+        span {
+          margin-left: 1rem;
+        }
+      }
+
+      &__title {
+        font-family: $font-montserrat;
+        color: $color-primary;
+        font-weight: 600;
+        font-size: 2.5rem;
+        margin: 0.5rem 0 1rem;
+        background-color: transparent;
+        padding: 0.6rem 0;
+        border-bottom: none;
+      }
+
+      &__content {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        color: $color-grey-darker;
+        width: 100%;
+        flex-grow: 1;
+
+        @include responsive(sm) {
+          font-size: 1.3rem;
+        }
+
+        textarea {
+          color: $color-grey-darker;
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          border: none;
+          padding: 0.6rem 0;
+          font-size: 1.4rem;
+          font-family: $font-open-sans;
+        }
+      }
+
+      &__image {
+        text-align: center;
+
+        img {
+          width: 60%;
+          border-radius: 3px;
+
+          @include responsive(sm) {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+
+  &__upload {
+    flex-basis: 25%;
+    display: none;
+    margin: 1rem 2rem;
+  }
+
+  &__upload-image {}
+
+  &__upload-location {}
+}

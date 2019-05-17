@@ -8,7 +8,7 @@ import clear from '../assets/img/clear.svg';
 
 interface State {}
 
-export class Entries extends Component<{}, State> {
+export class Entries extends Component<{ history: any }, State> {
   sample = () => {
     let group = [];
     for (let index = 0; index < 20; index++) {
@@ -22,6 +22,10 @@ export class Entries extends Component<{}, State> {
       );
     }
     return group;
+  };
+
+  addEntry = () => {
+    this.props.history.push('/entries/new');
   };
 
   render() {
@@ -47,7 +51,7 @@ export class Entries extends Component<{}, State> {
               )}
             </form>
           </div>
-          <div className="entries__add">
+          <div className="entries__add" onClick={this.addEntry}>
             <AddSVG />
           </div>
         </div>
