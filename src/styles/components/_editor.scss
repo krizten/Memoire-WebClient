@@ -3,6 +3,10 @@
   height: 100%;
   max-height: 100%;
 
+  @include responsive(sm) {
+    flex-direction: column;
+  }
+
   &__main {
     flex-grow: 1;
     margin: 1rem 2rem;
@@ -27,6 +31,10 @@
 
     button:not(:first-child) {
       margin-left: 2rem;
+
+      @include responsive(sm) {
+        margin-left: 1rem;
+      }
     }
   }
 
@@ -106,28 +114,16 @@
         }
       }
 
-      &__image {
-        text-align: center;
 
-        img {
-          width: 60%;
-          border-radius: 3px;
-
-          @include responsive(sm) {
-            width: 80%;
-          }
-        }
-      }
     }
   }
 
   &__upload {
-    flex-basis: 25%;
-    display: none;
+    flex-basis: 15%;
     margin: 1rem 2rem;
+
+    @include responsive(sm) {
+      // order: -1;
+    }
   }
-
-  &__upload-image {}
-
-  &__upload-location {}
 }

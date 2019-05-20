@@ -1,0 +1,40 @@
+.picker {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+
+  &__selector {
+    border: none;
+    color: $color-grey-light;
+    background-color: $color-white;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-style: italic;
+    cursor: pointer;
+
+    img {
+      width: 60%;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__file {
+    font-size: 10rem;
+    position: absolute;
+    padding: 0;
+    border-bottom: none;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+// STYLE OVERRIDES
+.form__body {
+  margin: 0;
+}

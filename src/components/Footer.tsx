@@ -8,7 +8,7 @@ interface Props {
 export const Footer: FunctionComponent<Props> = ({ className }) => {
   return (
     <div className={className ? `${className} footer` : 'footer'}>
-      <p className="footer__copyright">&copy; Mémoire, 2019</p>
+      <p className="footer__copyright">&copy; Mémoire, {new Date().getFullYear()}</p>
       <div className="footer__corporate">
         <Link to="/terms-and-conditions">
           <p className="footer__corporate-terms">Terms & Conditions</p>

@@ -11,6 +11,10 @@
     display: flex;
     justify-content: flex-end;
 
+    @include responsive(sm) {
+      padding: 1rem 2rem;
+    }
+
     button:not(:first-child) {
       margin-left: 2rem;
     }
