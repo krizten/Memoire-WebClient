@@ -8,3 +8,4 @@ export * from './edit';
 export * from './cancel';
 export * from './delete';
 export * from './location';
+export * from './image';

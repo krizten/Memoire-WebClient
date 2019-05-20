@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { OutlineButton } from './';
-import { LocationSVG } from '../svg';
+import { LocationSVG, DeleteSVG, EditSVG } from '../svg';
 import { IEntry } from '../interfaces';
 
 interface Props {
@@ -12,8 +12,12 @@ export const EntryViewer: FunctionComponent<Props> = () => {
   return (
     <div className="viewer">
       <div className="viewer__controls">
-        <OutlineButton type="button" actionType="edit" text="Edit" />
-        <OutlineButton type="button" actionType="delete" text="Delete" />
+        <OutlineButton type="button">
+          <span className="mr-3">Edit</span> <i className="fas fa-edit" />
+        </OutlineButton>
+        <OutlineButton type="button" className="outline-button--danger">
+          <span className="mr-3">Delete</span> <i className="fas fa-trash-alt" />
+        </OutlineButton>
       </div>
       <div className="viewer__entry scrollbar">
         <div className="entry">

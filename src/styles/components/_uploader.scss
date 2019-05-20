@@ -1,0 +1,82 @@
+.uploader {
+
+  &__image {
+    text-align: center;
+
+    img {
+      width: 100%;
+      border-radius: 3px;
+
+      @include responsive(sm) {
+        width: 80%;
+      }
+    }
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+
+    button {
+      padding: 0.5rem 1.5rem;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+// &__upload-image {
+//   width: 16rem;
+//   text-align: right;
+
+//   label {
+//     cursor: pointer;
+//     position: static;
+//     padding: 0.75rem 2.5rem;
+//     font-size: 1.3rem;
+//     background-color: $color-grey-dark;
+//     color: $color-white;
+//     border-radius: 5px;
+
+//     span {
+//       margin-left: 1rem;
+//     }
+//   }
+
+//   input {
+//     width: 0;
+//     height: 0;
+//     padding: 0;
+//     border-bottom: none;
+//     visibility: hidden;
+//   }
+// }
+
+// &__upload-location {
+//   margin-left: 2rem;
+
+//   button {
+//     padding: 0.9rem 2.5rem;
+//     font-size: 1.3rem;
+//     background-color: $color-grey-dark;
+//     color: $color-white;
+//     border-radius: 5px;
+//     border: none;
+//     cursor: pointer;
+
+//     span {
+//       margin-left: 1rem;
+//     }
+
+//     &:focus {
+//       outline: none;
+//     }
+//   }
+// }
