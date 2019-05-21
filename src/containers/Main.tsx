@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { Sidenav, EntryEditor } from '../components';
-import { Entries, Page404 } from './';
+import { Sidenav } from '../components';
+import { Entries, Page404, AddEntry, EditEntry } from './';
 
 export class Main extends Component {
   render() {
@@ -12,7 +12,8 @@ export class Main extends Component {
         <main className="main__content">
           <Switch>
             <Route exact={true} path="/entries" component={Entries} />
-            <Route exact={true} path="/entries/new" component={EntryEditor} />
+            <Route exact={true} path="/entries/new" component={AddEntry} />
+            <Route exact={true} path="/entries/edit/:id" component={EditEntry} />
             <Route component={Page404} />
           </Switch>
         </main>
