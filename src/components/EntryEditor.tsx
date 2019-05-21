@@ -3,9 +3,13 @@ import { OutlineButton } from './';
 import { LocationSVG } from '../svg';
 import { ImageUploader } from './ImageUploader';
 
+interface Props {
+  mode: 'new' | 'update';
+}
+
 interface State {}
 
-export class EntryEditor extends Component<{}, State> {
+export class EntryEditor extends Component<Props, State> {
   render() {
     return (
       <div className="editor">

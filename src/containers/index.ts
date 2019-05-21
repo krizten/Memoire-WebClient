@@ -5,3 +5,5 @@ export * from './Login';
 export * from './Page404';
 export * from './Main';
 export * from './Entries';
+export * from './AddEntry';
+export * from './EditEntry';
