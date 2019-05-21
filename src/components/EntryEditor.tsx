@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+
 import { OutlineButton } from './';
 import { LocationSVG } from '../svg';
 import { ImageUploader } from './ImageUploader';
@@ -10,14 +12,26 @@ interface Props {
 interface State {}
 
 export class EntryEditor extends Component<Props, State> {
+  clickBtn = () => {
+    toast('😁️ Testing Toast Component', {
+      position: 'top-center',
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
+
   render() {
     return (
       <div className="editor">
         <div className="editor__main">
           <div className="editor__controls">
-            <OutlineButton type="button">
+            <OutlineButton onClick={this.clickBtn} type="button">
               <span className="mr-3">Save</span> <i className="fas fa-save" />
             </OutlineButton>
+            <ToastContainer closeButton={false} transition={Slide} />
           </div>
           <div className="editor__entry">
             <form action="" className="entry">

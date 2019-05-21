@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Landing, Signup, Login, Main, Page404 } from './';
 import '../styles/app.scss';
