@@ -1,7 +1,4 @@
-@import 'styles/abstracts/mixins';
-@import 'styles/abstracts/variables';
-
-.signup {
+.login {
   height: auto;
   min-height: 100%;
   width: 100%;
@@ -9,10 +6,6 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem 5rem;
-
-  @include responsive(sm) {
-    padding: 1rem 1.5rem;
-  }
 
   &-header {
     display: flex;
@@ -56,6 +49,14 @@
     &__form {
       flex-grow: 1;
       margin: 0 1rem;
+
+      .forgot-password {
+        cursor: pointer;
+        color: $color-primary;
+        text-align: center;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
     }
   }
 
@@ -63,5 +64,9 @@
     .footer__corporate a {
       color: $color-grey-light;
     }
+  }
+
+  @include responsive(sm) {
+    padding: 1rem 1.5rem;
   }
 }

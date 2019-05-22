@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
-import user from '../assets/img/user.png';
-import '../styles/pages/profile.scss';
 import { OutlineButton, Modal } from '../components';
+import user from '../assets/img/user.png';
 
 interface Props {}
 

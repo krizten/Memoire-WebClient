@@ -14,7 +14,7 @@ interface State {}
 export class EntryEditor extends Component<Props, State> {
   clickBtn = () => {
     toast('😁️ Testing Toast Component', {
-      position: 'top-right',
+      position: 'top-center',
       autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,

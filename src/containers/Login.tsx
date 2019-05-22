@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Footer, InputGroup, Button, Modal } from '../components';
-import '../styles/pages/login.scss';
 import logo from '../assets/img/logo+name.png';
 import login from '../assets/img/login.svg';
 

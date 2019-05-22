@@ -3,7 +3,8 @@
 @import 'abstracts/variables',
 'abstracts/mixins';
 
-@import 'vendor/reset';
+@import 'vendor/reset',
+'vendor/toastify';
 
 @import 'base/animations',
 'base/base',
@@ -27,6 +28,8 @@
 'components/uploader',
 'components/picker';
 
-// @import
-//   'pages/landing',
-//   'pages/404';
+@import 'pages/landing',
+'pages/404',
+'pages/signup',
+'pages/login',
+'pages/profile';

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Footer, Anchor } from '../components';
-import '../styles/pages/404.scss';
 import logo from '../assets/img/logo+name.png';
 import img404 from '../assets/img/not-found.svg';
 
