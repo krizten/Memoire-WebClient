@@ -7,3 +7,4 @@ export * from './Main';
 export * from './Entries';
 export * from './AddEntry';
 export * from './EditEntry';
+export * from './Profile';

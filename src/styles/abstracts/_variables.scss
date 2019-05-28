@@ -6,6 +6,7 @@ $color-primary-lightest: #BEBBF6;
 $color-primary-gradient-start: #895BF2;
 $color-primary-gradient-finish: #4B39BF;
 $color-danger:rgb(218, 72, 101);
+$color-grey: #EFEEF1;
 $color-grey-darker: #222222;
 $color-grey-dark: #444444;
 $color-grey-light: #888888;
@@ -28,3 +29,4 @@ $font-size-default: 1.6rem;
 // Z-INDEXES
 $z-index-modal: 10;
 $z-index-menu-item: 5;
+$z-index-profile-editor: 15;

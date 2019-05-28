@@ -1,13 +1,10 @@
-@import 'styles/abstracts/mixins';
-@import 'styles/abstracts/variables';
-
 .landing {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url(../../assets/img/landing-lg.svg);
+  background-image: url(/img/landing-lg.svg);
   background-color: $color-white;
   background-size: cover;
   background-position: center;
@@ -125,6 +122,6 @@
   }
 
   @include responsive(lg) {
-    background-image: url(../../assets/img/landing-sm.svg)
+    background-image: url(/img/landing-sm.svg)
   }
 }
