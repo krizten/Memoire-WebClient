@@ -87,6 +87,26 @@
     }
   }
 
+  &--secondary {
+    background-color: $color-grey-dark;
+
+    &:hover,
+    &:focus {
+      background-color: darken($color-grey-dark, 10%);
+    }
+
+    &:disabled,
+    &[disabled] {
+      background-color: lighten($color-grey-dark, 10%);
+      cursor: not-allowed;
+
+      &:hover,
+      &:focus {
+        transform: none;
+      }
+    }
+  }
+
   &:focus {
     outline: none;
   }

@@ -10,3 +10,5 @@ export * from './OutlineButton';
 export * from './EntryEditor';
 export * from './ImageUploader';
 export * from './ImagePicker';
+export * from './ProfileViewer';
+export * from './ProfileEditor';

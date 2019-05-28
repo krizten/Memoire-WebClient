@@ -1,0 +1,110 @@
+.profile-viewer {
+  display: flex;
+  height: 100%;
+  max-height: 100%;
+  padding: 2rem 3rem;
+  justify-content: space-between;
+
+  @include responsive(sm) {
+    flex-direction: column;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+  }
+
+  &__bio {
+    flex-basis: 40%;
+    margin-right: 1rem;
+
+    @include responsive(sm) {
+      margin-right: 0;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__avatar {
+    @include flexAbsCenter;
+
+    img {
+      border-radius: 50%;
+      width: 40%;
+      box-shadow: 0 2px 10px rgba($color-black, 0.3);
+    }
+  }
+
+  &__contact-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: $color-grey;
+    padding: 2rem 4rem;
+    min-height: 18rem;
+    margin: 0 5rem;
+    margin-top: -7rem;
+    border-radius: 3px;
+
+    @include responsive(sm) {
+      margin: 0;
+      margin-top: -7rem;
+    }
+  }
+
+  &__full-name {
+    font-family: $font-dosis;
+    color: $color-primary;
+    font-weight: 600;
+    font-size: 2.5rem;
+  }
+
+  &__email {
+    font-family: $font-montserrat;
+    color: $color-grey-light;
+    font-size: 1.3rem;
+  }
+
+  &__stats {
+    flex-grow: 1;
+    background-color: $color-grey;
+    border-radius: 3px;
+    padding: 3rem 5rem;
+    align-self: flex-start;
+
+    @include responsive(sm) {
+      padding: 2rem;
+    }
+  }
+
+  &__data-row {
+    margin-bottom: 2rem;
+
+    &--single {}
+
+    &--double {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__data-title {
+    font-family: $font-dosis;
+    color: $color-primary;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+
+  &__data-content {
+    font-family: $font-montserrat;
+    color: $color-grey-light;
+    font-size: 1.3rem;
+  }
+
+  &__controls {
+    padding: 1rem 0;
+    border-radius: 1px;
+    display: flex;
+
+    button:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+}

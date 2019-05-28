@@ -72,7 +72,7 @@ export class ImagePicker extends Component<Props, State> {
                   <div>
                     <img src={imgSrc} alt="upload" />
                   </div>
-                  <p>Click to Upload Image</p>
+                  <p>Click to Select Image</p>
                 </button>
                 <input
                   onChange={this.onChange}
