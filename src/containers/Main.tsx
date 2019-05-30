@@ -11,11 +11,11 @@ export class Main extends Component {
         <Sidenav className="main__sidenav" />
         <main className="main__content">
           <Switch>
-            <Route exact={true} path="/entries" component={Entries} />
-            <Route exact={true} path="/entries/new" component={AddEntry} />
-            <Route exact={true} path="/entries/edit/:id" component={EditEntry} />
-            <Route exact={true} path="/profile" component={Profile} />
-            <Route component={Page404} />
+            <Route exact={true} path="/app/entries" component={Entries} />
+            <Route exact={true} path="/app/entries/new" component={AddEntry} />
+            <Route exact={true} path="/app/entries/edit/:id" component={EditEntry} />
+            <Route exact={true} path="/app/profile" component={Profile} />
+            {/* <Route exact={true} path="/settings" component={Settings} /> */}
           </Switch>
         </main>
       </div>

@@ -17,7 +17,7 @@ export class App extends Component {
             <Route exact={true} path="/" component={Landing} />
             <Route exact={true} path="/signup" component={Signup} />
             <Route exact={true} path="/login" component={Login} />
-            <Route render={this.renderMain} />
+            <Route exact={false} path="/app" render={this.renderMain} />
             <Route component={Page404} />
           </Switch>
         </div>
