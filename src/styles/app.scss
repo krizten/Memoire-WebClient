@@ -15,6 +15,7 @@
 'layout/main',
 'layout/sidenav',
 'layout/entries',
+'layout/header',
 'layout/footer';
 
 @import 'components/anchor',
@@ -28,10 +29,13 @@
 'components/uploader',
 'components/picker',
 'components/profile-viewer',
-'components/profile-editor';
+'components/profile-editor',
+'components/entry-settings',
+'components/security-settings';
 
 @import 'pages/landing',
 'pages/404',
 'pages/signup',
 'pages/login',
-'pages/profile';
+'pages/profile',
+'pages/settings';

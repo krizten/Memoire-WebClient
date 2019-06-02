@@ -1,0 +1,75 @@
+.entry-settings {
+  &__export {
+    margin-bottom: 4rem;
+  }
+
+  &__export-title,
+  &__clear-title {
+    font-family: $font-dosis;
+    color: $color-primary;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__export-text,
+  &__clear-text {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__export-icon-group {
+    margin: 2rem 0;
+  }
+
+  &__export-icon {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+
+    img {
+      width: 6%;
+
+      @include responsive(sm) {
+        width: 20%;
+      }
+    }
+  }
+
+  &__clear-form {
+    display: inline-flex;
+    font-family: $font-montserrat;
+    margin-bottom: 0.5rem;
+
+    input {
+      background-color: rgba($color-grey, 0.55);
+      border-bottom: none;
+      padding: 0.6rem 0.5rem;
+    }
+
+    button {
+      padding: 0.6rem 1.5rem;
+      border: none;
+      background-color: $color-danger;
+      font-weight: 500;
+      font-size: 1.4rem;
+      font-family: $font-montserrat;
+      color: $color-white;
+      border-radius: 0 2px 2px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: darken($color-danger, 10%);
+      }
+    }
+  }
+}

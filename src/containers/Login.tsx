@@ -33,7 +33,7 @@ export class Login extends Component<{ history: any }, State> {
 
   onSubmit = (e: any) => {
     e.preventDefault();
-    this.props.history.push('/entries');
+    this.props.history.push('/app/entries');
   };
 
   showModal = () => {
