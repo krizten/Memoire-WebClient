@@ -94,7 +94,7 @@ export class ProfileEditor extends Component<Props, State> {
                 Cancel
               </OutlineButton>
               <OutlineButton className="button button--update" type="button">
-                Update {processing ? <i className="ml-3 fas fa-spinner fa-spin" /> : null}
+                Save {processing ? <i className="ml-3 fas fa-spinner fa-spin" /> : null}
               </OutlineButton>
             </div>
           </div>

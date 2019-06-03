@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-import { OutlineButton, Modal, ProfileEditor, ProfileViewer } from '../components';
+import { OutlineButton, Modal, ProfileEditor, ProfileViewer, Header } from '../components';
 import user from '../assets/img/user.png';
 
 interface Props {}
@@ -53,24 +53,27 @@ export class Profile extends Component<Props, State> {
 
     return (
       <Fragment>
-        {!editMode ? (
-          <ProfileViewer
-            updateAccountHandler={this.showEditMode}
-            avatar={user}
-            fullName="Michael Richards"
-            email="michaelrichards@gmail.com"
-            entriesCount={15}
-            deleteAccountHandler={this.showDeleteModal}
-            bio={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur reiciendis magni, eum atque a ab officiis laboriosam recusandae repellat alias totam quae animi quas! Laboriosam, perspiciatis sapiente unde modi aliquid eius omnis excepturi nemo totam optio officiis accusantium velit eaque ea cum sint veritatis corporis. Iure voluptatibus inventore rerum quasi`}
-          />
-        ) : (
-          <ProfileEditor
-            cancelUpdateHandler={this.hideEditMode}
-            avatar={user}
-            email="michaelrichards@gmail.com"
-            entriesCount={14}
-          />
-        )}
+        <div className="profile">
+          <Header title="Profile" />
+          {!editMode ? (
+            <ProfileViewer
+              updateAccountHandler={this.showEditMode}
+              avatar={user}
+              fullName="Michael Richards"
+              email="michaelrichards@gmail.com"
+              entriesCount={15}
+              deleteAccountHandler={this.showDeleteModal}
+              bio={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur reiciendis magni, eum atque a ab officiis laboriosam recusandae repellat alias totam quae animi quas! Laboriosam, perspiciatis sapiente unde modi aliquid eius omnis excepturi nemo totam optio officiis accusantium velit eaque ea cum sint veritatis corporis. Iure voluptatibus inventore rerum quasi`}
+            />
+          ) : (
+            <ProfileEditor
+              cancelUpdateHandler={this.hideEditMode}
+              avatar={user}
+              email="michaelrichards@gmail.com"
+              entriesCount={14}
+            />
+          )}
+        </div>
         <Modal
           show={showDeleteModal}
           handleClose={this.hideDeleteModal}

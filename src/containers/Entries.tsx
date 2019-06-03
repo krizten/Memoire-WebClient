@@ -25,7 +25,7 @@ export class Entries extends Component<{ history: any }, State> {
   };
 
   addEntry = () => {
-    this.props.history.push('/entries/new');
+    this.props.history.push('/app/entries/new');
   };
 
   render() {

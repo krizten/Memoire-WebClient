@@ -1,5 +1,6 @@
 export * from './Anchor';
 export * from './Footer';
+export * from './Header';
 export * from './InputGroup';
 export * from './Button';
 export * from './Modal';
@@ -12,3 +13,5 @@ export * from './ImageUploader';
 export * from './ImagePicker';
 export * from './ProfileViewer';
 export * from './ProfileEditor';
+export * from './EntrySettingsTab';
+export * from './SecuritySettingsTab';
