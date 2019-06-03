@@ -1,9 +1,9 @@
 # Memoire-WebClient <img src="https://travis-ci.com/krizten/Memoire-WebClient.svg?token=NkFAritBep7j1WfW851H&branch=dev" alt="Travis" />
 Web client for Memoire app (React SPA). Memoire is an online journal where users can pen down their thoughts and feelings.
 
-<div style="text-align: center;">
+<p align="center">
   <img src="https://thumbs.gfycat.com/EminentUntimelyHyracotherium-max-1mb.gif" width="300" height="169" alt="Preview" />
-</div>
+</p>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
