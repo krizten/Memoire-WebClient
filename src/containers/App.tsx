@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Landing, Signup, Login, Main, Page404 } from './';
+import { Landing, Signup, Login, Page404 } from './';
 import '../styles/app.scss';
 
-export class App extends Component {
-  renderMain = () => {
-    return <Main />;
-  };
+const Main = lazy(() => import('./Main'));
 
+export class App extends Component {
   render() {
     return (
       <Router>
@@ -17,7 +15,9 @@ export class App extends Component {
             <Route exact={true} path="/" component={Landing} />
             <Route exact={true} path="/signup" component={Signup} />
             <Route exact={true} path="/login" component={Login} />
-            <Route exact={false} path="/app" render={this.renderMain} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Route exact={false} path="/app" component={Main} />
+            </Suspense>
             <Route component={Page404} />
           </Switch>
         </div>

@@ -22,3 +22,5 @@ export class Main extends Component {
     );
   }
 }
+
+export { Main as default } from './Main';
