@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import logo from '../assets/img/logo+name.png';
 import signup from '../assets/img/signup.svg';
 import { Footer, InputGroup, Button } from '../components';
-import { signupUser } from '../store/actions';
 
 interface State {
   name: string;
@@ -15,7 +13,7 @@ interface State {
   acceptTerms: boolean;
 }
 
-class Signup extends Component<{}, State> {
+export class Signup extends Component<{}, State> {
   state: State = {
     name: '',
     email: '',
@@ -153,12 +151,3 @@ class Signup extends Component<{}, State> {
     );
   }
 }
-
-const matchDispatchToProps = (dispatch: any) => ({
-  signupUser: (signupData: any) => dispatch(signupUser(signupData)),
-});
-
-export default connect(
-  null,
-  matchDispatchToProps
-)(Signup);

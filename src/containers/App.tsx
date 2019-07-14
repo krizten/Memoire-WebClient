@@ -15,7 +15,7 @@ export class App extends Component {
             <Route exact={true} path="/" component={Landing} />
             <Route exact={true} path="/signup" component={Signup} />
             <Route exact={true} path="/login" component={Login} />
-            <PrivateRoute isAuthenticated={false} exact={false} path="/app" component={Main} />
+            <PrivateRoute isAuthenticated={!false} exact={false} path="/app" component={Main} />
             <Route component={Page404} />
           </Switch>
         </div>
