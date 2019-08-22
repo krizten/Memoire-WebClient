@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 import { Footer, InputGroup, Button } from '../components';
+import { AppState, ConnectedReduxProps } from '../store';
+import { signupUser } from '../store/auth/actions';
+import { SignupDTO, User } from '../interfaces';
 import logo from '../assets/img/logo+name.png';
-import signup from '../assets/img/signup.svg';
+import signupImgSrc from '../assets/img/signup.svg';
 
 interface State {
   name: string;
@@ -11,16 +16,115 @@ interface State {
   password: string;
   confirmPassword: string;
   acceptTerms: boolean;
+  avatar: string;
+  errors?: any;
 }
 
-export class Signup extends Component<{}, State> {
+interface PropsFromState {
+  user: User | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+  errors?: string;
+}
+
+interface PropsFromDispatch {
+  signupUser: typeof signupUser;
+}
+
+type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
+
+class Signup extends Component<AllProps, State> {
   state: State = {
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
     acceptTerms: false,
-    // errors: {},
+    avatar: 'https://memoire-media.s3.us-east-2.amazonaws.com/avatar/default_user_avatar.png',
+    errors: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  };
+
+  componentDidMount() {
+    document.title = 'Memoire | Signup';
+
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/app/entries');
+    }
+  }
+
+  // credits: https://stackoverflow.com/a/46181/8910779
+  validateEmail = (email: string) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  onBlur = (e: any) => {
+    switch (e.target.name) {
+      case 'name':
+        if (!e.target.value) {
+          this.setState({
+            errors: { ...this.state.errors, name: 'Full name should not be empty.' },
+          });
+        } else {
+          this.setState({ errors: { ...this.state.errors, name: '' } });
+        }
+        break;
+
+      case 'email':
+        if (!e.target.value) {
+          this.setState({ errors: { ...this.state.errors, email: 'Email should not be empty.' } });
+        } else if (!this.validateEmail(e.target.value)) {
+          this.setState({ errors: { ...this.state.errors, email: 'Email is not valid.' } });
+        } else {
+          this.setState({ errors: { ...this.state.errors, email: '' } });
+        }
+        break;
+
+      case 'password':
+        if (!e.target.value) {
+          this.setState({
+            errors: { ...this.state.errors, password: 'Password should not be empty.' },
+          });
+        } else if (e.target.value.length > 0 && e.target.value.length < 6) {
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              password: 'Password must be longer than or equal to 6 characters.',
+            },
+          });
+        } else if (
+          this.state.confirmPassword &&
+          this.state.password !== this.state.confirmPassword
+        ) {
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              password: 'Password does not match.',
+            },
+          });
+        } else {
+          this.setState({ errors: { ...this.state.errors, password: '' } });
+        }
+        break;
+
+      case 'confirmPassword':
+        if (this.state.password !== this.state.confirmPassword) {
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              confirmPassword: 'Password does not match.',
+            },
+          });
+        } else {
+          this.setState({ errors: { ...this.state.errors, confirmPassword: '' } });
+        }
+        break;
+    }
   };
 
   onChange = (e: any) => {
@@ -43,13 +147,48 @@ export class Signup extends Component<{}, State> {
     }
   };
 
-  onSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(this.state);
+  checkFormErrors = (): boolean => {
+    const { errors } = this.state;
+    for (const error of Object.values(errors)) {
+      if (error) {
+        return false;
+      }
+    }
+    return true;
   };
 
-  render() {
+  onSubmit = (e: any) => {
+    e.preventDefault();
+
     const { name, email, password, confirmPassword, acceptTerms } = this.state;
+    if (name && email && password && confirmPassword && acceptTerms && this.checkFormErrors()) {
+      this.props.signupUser(this.state);
+      this.clearForm();
+    }
+
+    // if successful response from server, clear form & redirect to dashboard
+    // else show error message toast
+  };
+
+  clearForm() {
+    this.setState({
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      acceptTerms: false,
+      avatar: 'https://memoire-media.s3.us-east-2.amazonaws.com/avatar/default_user_avatar.png',
+      errors: {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      },
+    });
+  }
+
+  render() {
+    const { name, email, password, confirmPassword, acceptTerms, errors } = this.state;
 
     return (
       <div className="signup">
@@ -62,7 +201,7 @@ export class Signup extends Component<{}, State> {
         </div>
         <div className="signup-main">
           <div className="signup-main__image">
-            <img src={signup} alt="Signup" />
+            <img src={signupImgSrc} alt="Signup" />
           </div>
           <div className="signup-main__form form">
             <div className="form__header">
@@ -77,7 +216,9 @@ export class Signup extends Component<{}, State> {
                   type="text"
                   value={name}
                   placeholder="Your Name"
+                  onBlur={this.onBlur}
                   onChange={this.onChange}
+                  error={errors.name}
                 />
                 <InputGroup
                   label="email"
@@ -85,7 +226,9 @@ export class Signup extends Component<{}, State> {
                   type="email"
                   value={email}
                   placeholder="Your Email"
+                  onBlur={this.onBlur}
                   onChange={this.onChange}
+                  error={errors.email}
                 />
                 <InputGroup
                   label="password"
@@ -93,7 +236,9 @@ export class Signup extends Component<{}, State> {
                   type="password"
                   value={password}
                   placeholder="Password"
+                  onBlur={this.onBlur}
                   onChange={this.onChange}
+                  error={errors.password}
                 />
                 <InputGroup
                   label="confirmPassword"
@@ -101,7 +246,9 @@ export class Signup extends Component<{}, State> {
                   type="password"
                   value={confirmPassword}
                   placeholder="Repeat your password"
+                  onBlur={this.onBlur}
                   onChange={this.onChange}
+                  error={errors.confirmPassword}
                 />
                 <div className="form-group-container">
                   <div className="form-group">
@@ -129,8 +276,18 @@ export class Signup extends Component<{}, State> {
                       name="signup"
                       text="Register"
                       onClick={this.onSubmit}
-                      processing={false}
-                      disabled={false}
+                      processing={this.props.loading}
+                      disabled={
+                        this.props.loading ||
+                        !(
+                          name &&
+                          email &&
+                          password &&
+                          confirmPassword &&
+                          acceptTerms &&
+                          this.checkFormErrors()
+                        )
+                      }
                     />
                   </div>
                 </div>
@@ -151,3 +308,19 @@ export class Signup extends Component<{}, State> {
     );
   }
 }
+
+const mapStateToProps = ({ auth }: AppState) => ({
+  isAuthenticated: auth.isAuthenticated,
+  user: auth.user,
+  loading: auth.loading,
+  errors: auth.errors,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  signupUser: (payload: SignupDTO) => dispatch(signupUser(payload)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Signup);
