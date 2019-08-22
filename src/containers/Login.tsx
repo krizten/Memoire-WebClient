@@ -20,6 +20,10 @@ export class Login extends Component<{ history: any }, State> {
     show: false,
   };
 
+  componentDidMount() {
+    document.title = 'Memoire | Login';
+  }
+
   onChange = (e: any) => {
     switch (e.target.name) {
       case 'email':

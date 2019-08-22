@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEventHandler } from 'react';
+import React, { FunctionComponent, ChangeEventHandler, FocusEventHandler } from 'react';
 
 interface Props {
   label: 'name' | 'email' | 'password' | 'confirmPassword' | string;
@@ -8,6 +8,7 @@ interface Props {
   placeholder: string;
   value: string;
   onChange: ChangeEventHandler<any>;
+  onBlur?: FocusEventHandler<any>;
   error?: string;
 }
 
@@ -19,6 +20,7 @@ export const InputGroup: FunctionComponent<Props> = ({
   type = 'text',
   value,
   onChange,
+  onBlur,
   error,
 }) => {
   return (
@@ -34,6 +36,7 @@ export const InputGroup: FunctionComponent<Props> = ({
           id={id ? id : name}
           placeholder={placeholder}
           onChange={onChange}
+          onBlur={onBlur}
           value={value}
         />
       </div>

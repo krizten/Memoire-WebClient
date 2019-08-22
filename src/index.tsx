@@ -2,11 +2,25 @@ import 'react-app-polyfill/ie11';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import { createHashHistory } from 'history';
 
-import * as serviceWorker from './serviceWorker';
 import { App } from './containers';
+import configureStore from './configureStore';
+import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const history = createHashHistory();
+const initialState = window.initialReduxState;
+const store = configureStore(history, initialState);
+
+ReactDOM.render(
+  <Provider store={store as any}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
