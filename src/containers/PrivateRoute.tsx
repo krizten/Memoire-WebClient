@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
+import { connect } from 'react-redux';
+import { AppState } from '../store';
 
 export interface PrivateRouteProps extends RouteProps {
   isAuthenticated: boolean;
   component: any;
 }
 
-export const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
+const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
   component: Component,
   isAuthenticated,
   ...rest
@@ -25,3 +27,9 @@ export const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
     />
   );
 };
+
+const mapStateToProps = ({ auth: { isAuthenticated } }: AppState) => ({
+  isAuthenticated,
+});
+
+export default connect(mapStateToProps)(PrivateRoute);

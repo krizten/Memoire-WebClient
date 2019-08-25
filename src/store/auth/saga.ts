@@ -8,14 +8,16 @@ import {
   loginUser,
   loginUserSuccess,
   setCurrentUser,
+  forgotPasswordSuccess,
+  forgotPasswordError,
 } from './actions';
-import { registerService, loginService, setAuthHeader } from '../../services';
+import { register, login, setAuthHeader, forgotPassword } from '../../services';
 import { notify } from '../../utils';
 import { Token, User } from '../../interfaces';
 
 function* signupSaga({ payload }: ReturnType<any>) {
   try {
-    yield call(registerService, payload);
+    yield call(register, payload);
     yield put(signupUserSuccess());
 
     // login here
@@ -23,18 +25,18 @@ function* signupSaga({ payload }: ReturnType<any>) {
     yield put(loginUser({ email, password }));
   } catch (err) {
     if (err.response) {
+      yield put(signupUserError());
       notify({ message: err.response.data.error.message });
-      yield put(signupUserError());
     } else {
-      notify({ message: 'Internal server error occurred.' });
       yield put(signupUserError());
+      notify({ message: 'Internal server error occurred.' });
     }
   }
 }
 
 function* loginSaga({ payload }: ReturnType<any>) {
   try {
-    const response = yield call(loginService, payload);
+    const response = yield call(login, payload);
     yield put(loginUserSuccess());
 
     // Set Token & User
@@ -53,11 +55,28 @@ function* loginSaga({ payload }: ReturnType<any>) {
     yield put(setCurrentUser(user));
   } catch (err) {
     if (err.response) {
+      yield put(signupUserError());
       notify({ message: err.response.data.error.message });
-      yield put(signupUserError());
     } else {
-      notify({ message: 'Internal server error occurred.' });
       yield put(signupUserError());
+      notify({ message: 'Internal server error occurred.' });
+    }
+  }
+}
+
+function* forgotPasswordSaga({ payload }: ReturnType<any>) {
+  try {
+    const response = yield call(forgotPassword, payload);
+    const message = response.data.summary;
+    yield put(forgotPasswordSuccess());
+    notify({ message });
+  } catch (err) {
+    if (err.response) {
+      yield put(forgotPasswordError());
+      notify({ message: err.response.data.error.message });
+    } else {
+      yield put(forgotPasswordError());
+      notify({ message: 'Internal server error occurred.' });
     }
   }
 }
@@ -65,6 +84,7 @@ function* loginSaga({ payload }: ReturnType<any>) {
 function* authWatcherSaga() {
   yield takeLatest(AuthActionTypes.SIGNUP_USER, signupSaga);
   yield takeLatest(AuthActionTypes.LOGIN_USER, loginSaga);
+  yield takeLatest(AuthActionTypes.FORGOT_PASSWORD, forgotPasswordSaga);
 }
 
 function* authSaga() {

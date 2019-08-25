@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { Footer, InputGroup, Button, Modal } from '../components';
-import { loginUser } from '../store/auth/actions';
-import { User, LoginDTO } from '../interfaces';
+import { loginUser, forgotPassword } from '../store/auth/actions';
+import { User, LoginDTO, ForgotPasswordDTO } from '../interfaces';
 import { ConnectedReduxProps, AppState } from '../store';
 import logo from '../assets/img/logo+name.png';
 import login from '../assets/img/login.svg';
@@ -24,10 +24,12 @@ interface PropsFromState {
   isAuthenticated: boolean;
   loading: boolean;
   error?: string;
+  forgotPasswordLoading?: boolean;
 }
 
 interface PropsFromDispatch {
   loginUser: typeof loginUser;
+  forgotPassword: typeof forgotPassword;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
@@ -41,6 +43,7 @@ class Login extends Component<AllProps, State> {
     errors: {
       email: '',
       password: '',
+      forgotPasswordEmail: '',
     },
   };
 
@@ -62,12 +65,23 @@ class Login extends Component<AllProps, State> {
     return nextState;
   }
 
-  checkFormErrors = (): boolean => {
-    const { errors } = this.state;
-    for (const error of Object.values(errors)) {
-      if (error) {
-        return false;
+  checkFormErrors = (isLoginMode = true): boolean => {
+    if (isLoginMode) {
+      const {
+        errors: { email, password },
+      } = this.state;
+      for (const error of Object.values({ email, password })) {
+        if (error) {
+          return false;
+        }
       }
+      return true;
+    }
+    const {
+      errors: { forgotPassword },
+    } = this.state;
+    if (forgotPassword) {
+      return false;
     }
     return true;
   };
@@ -131,6 +145,20 @@ class Login extends Component<AllProps, State> {
     this.setState({ show: false });
   };
 
+  forgotPasswordOnBlur = (e: any) => {
+    if (!e.target.value) {
+      this.setState({
+        errors: { ...this.state.errors, forgotPasswordEmail: 'Email should not be empty.' },
+      });
+    } else if (!validateEmail(e.target.value)) {
+      this.setState({
+        errors: { ...this.state.errors, forgotPasswordEmail: 'Email is not valid.' },
+      });
+    } else {
+      this.setState({ errors: { ...this.state.errors, forgotPasswordEmail: '' } });
+    }
+  };
+
   forgotPasswordOnChange = (e: any) => {
     this.setState({
       forgotPasswordEmail: e.target.value,
@@ -139,6 +167,11 @@ class Login extends Component<AllProps, State> {
 
   forgotPasswordSubmit = (e: any) => {
     e.preventDefault();
+
+    const { forgotPasswordEmail: email } = this.state;
+    if (email && this.checkFormErrors(false)) {
+      this.props.forgotPassword({ email });
+    }
   };
 
   render() {
@@ -231,21 +264,31 @@ class Login extends Component<AllProps, State> {
           actionButtonText="Reset"
           actionButtonMethod={this.forgotPasswordSubmit}
           onChange={this.forgotPasswordOnChange}
-          processing={true}
+          onBlur={this.forgotPasswordOnBlur}
+          error={errors.forgotPasswordEmail}
+          processing={!!this.props.forgotPasswordLoading}
+          disabled={
+            !!this.props.forgotPasswordLoading ||
+            !(forgotPasswordEmail && this.checkFormErrors(false))
+          }
         />
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ auth: { isAuthenticated, user, loading } }: AppState) => ({
+const mapStateToProps = ({
+  auth: { isAuthenticated, user, loading, forgotPasswordLoading },
+}: AppState) => ({
   isAuthenticated,
   user,
   loading,
+  forgotPasswordLoading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   loginUser: (payload: LoginDTO) => dispatch(loginUser(payload)),
+  forgotPassword: (payload: ForgotPasswordDTO) => dispatch(forgotPassword(payload)),
 });
 
 export default connect(

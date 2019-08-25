@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { SignupDTO, LoginDTO } from '../interfaces';
+import { SignupDTO, LoginDTO, ForgotPasswordDTO } from '../interfaces';
 import { authenticationEndpoints } from '../constants';
 
-export const registerService = async (payload: SignupDTO) => {
+export const register = async (payload: SignupDTO) => {
   return await axios({
     url: `/${authenticationEndpoints.SIGNUP}`,
     method: 'POST',
@@ -10,9 +10,17 @@ export const registerService = async (payload: SignupDTO) => {
   });
 };
 
-export const loginService = async (payload: LoginDTO) => {
+export const login = async (payload: LoginDTO) => {
   return await axios({
     url: `/${authenticationEndpoints.LOGIN}`,
+    method: 'POST',
+    data: JSON.stringify(payload),
+  });
+};
+
+export const forgotPassword = async (payload: ForgotPasswordDTO) => {
+  return await axios({
+    url: `/${authenticationEndpoints.FORGOT_PASSWORD}`,
     method: 'POST',
     data: JSON.stringify(payload),
   });

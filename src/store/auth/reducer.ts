@@ -5,6 +5,7 @@ export const initialAuthState: AuthState = {
   user: null,
   isAuthenticated: false,
   loading: false,
+  forgotPasswordLoading: false,
 };
 
 const reducer = (state = initialAuthState, action: AuthAction): AuthState => {
@@ -21,6 +22,12 @@ const reducer = (state = initialAuthState, action: AuthAction): AuthState => {
       return { ...state, loading: false };
     case AuthActionTypes.SET_CURRENT_USER:
       return { ...state, user: action.payload, isAuthenticated: !isEmpty(action.payload) };
+    case AuthActionTypes.FORGOT_PASSWORD:
+      return { ...state, forgotPasswordLoading: true };
+    case AuthActionTypes.FORGOT_PASSWORD_SUCCESS:
+      return { ...state, forgotPasswordLoading: false };
+    case AuthActionTypes.FORGOT_PASSWORD_FAIL:
+      return { ...state, forgotPasswordLoading: false };
     default:
       return state;
   }
