@@ -1,20 +1,19 @@
 import axios from 'axios';
-import { SignupDTO } from '../interfaces';
-import { environments, authenticationEndpoints } from '../constants';
-
-const url =
-  process.env.NODE_ENV === 'production'
-    ? `${environments.production.server}`
-    : `${environments.development.server}`;
+import { SignupDTO, LoginDTO } from '../interfaces';
+import { authenticationEndpoints } from '../constants';
 
 export const registerService = async (payload: SignupDTO) => {
   return await axios({
-    url: `${url}/${authenticationEndpoints.SIGNUP}`,
+    url: `/${authenticationEndpoints.SIGNUP}`,
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+    data: JSON.stringify(payload),
+  });
+};
+
+export const loginService = async (payload: LoginDTO) => {
+  return await axios({
+    url: `/${authenticationEndpoints.LOGIN}`,
+    method: 'POST',
     data: JSON.stringify(payload),
   });
 };

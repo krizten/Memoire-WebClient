@@ -1,8 +1,10 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
-import { Landing, Login, Page404, Main } from './';
+import { Landing, Page404, Main } from './';
 import Signup from './Signup';
+import Login from './Login';
 import '../styles/app.scss';
 import { PrivateRoute } from '../components';
 
@@ -19,6 +21,7 @@ export class App extends Component {
             <Route component={Page404} />
           </Switch>
         </div>
+        <ToastContainer closeButton={false} transition={Slide} />
       </Router>
     );
   }

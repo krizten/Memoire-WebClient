@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ToastContainer, toast, Slide } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { OutlineButton } from './';
 import { LocationSVG } from '../svg';
@@ -35,7 +35,6 @@ export class EntryEditor extends Component<Props, State> {
               <OutlineButton onClick={this.clickBtn} type="button">
                 <span className="mr-3">Save</span> <i className="fas fa-save" />
               </OutlineButton>
-              <ToastContainer closeButton={false} transition={Slide} />
             </div>
             <div className="editor__entry">
               <form action="" className="entry">
