@@ -9,6 +9,7 @@ import { signupUser } from '../store/auth/actions';
 import { SignupDTO, User } from '../interfaces';
 import logo from '../assets/img/logo+name.png';
 import signupImgSrc from '../assets/img/signup.svg';
+import { validateEmail } from '../utils';
 
 interface State {
   name: string;
@@ -24,7 +25,7 @@ interface PropsFromState {
   user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
-  errors?: string;
+  error?: string;
 }
 
 interface PropsFromDispatch {
@@ -57,12 +58,6 @@ class Signup extends Component<AllProps, State> {
     }
   }
 
-  // credits: https://stackoverflow.com/a/46181/8910779
-  validateEmail = (email: string) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
-
   onBlur = (e: any) => {
     switch (e.target.name) {
       case 'name':
@@ -78,7 +73,7 @@ class Signup extends Component<AllProps, State> {
       case 'email':
         if (!e.target.value) {
           this.setState({ errors: { ...this.state.errors, email: 'Email should not be empty.' } });
-        } else if (!this.validateEmail(e.target.value)) {
+        } else if (!validateEmail(e.target.value)) {
           this.setState({ errors: { ...this.state.errors, email: 'Email is not valid.' } });
         } else {
           this.setState({ errors: { ...this.state.errors, email: '' } });
@@ -160,14 +155,17 @@ class Signup extends Component<AllProps, State> {
   onSubmit = (e: any) => {
     e.preventDefault();
 
-    const { name, email, password, confirmPassword, acceptTerms } = this.state;
+    const { name, email, password, confirmPassword, acceptTerms, avatar } = this.state;
     if (name && email && password && confirmPassword && acceptTerms && this.checkFormErrors()) {
-      this.props.signupUser(this.state);
-      this.clearForm();
+      const signupData: SignupDTO = {
+        name,
+        email,
+        password,
+        acceptTerms,
+        avatar,
+      };
+      this.props.signupUser(signupData);
     }
-
-    // if successful response from server, clear form & redirect to dashboard
-    // else show error message toast
   };
 
   clearForm() {
@@ -185,6 +183,16 @@ class Signup extends Component<AllProps, State> {
         confirmPassword: '',
       },
     });
+  }
+
+  static getDerivedStateFromProps(nextProps: AllProps, prevState: State): State {
+    const nextState = {} as State;
+
+    if (nextProps.isAuthenticated) {
+      nextProps.history.push('/app/entries');
+    }
+
+    return nextState;
   }
 
   render() {
@@ -309,11 +317,10 @@ class Signup extends Component<AllProps, State> {
   }
 }
 
-const mapStateToProps = ({ auth }: AppState) => ({
-  isAuthenticated: auth.isAuthenticated,
-  user: auth.user,
-  loading: auth.loading,
-  errors: auth.errors,
+const mapStateToProps = ({ auth: { isAuthenticated, user, loading } }: AppState) => ({
+  isAuthenticated,
+  user,
+  loading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

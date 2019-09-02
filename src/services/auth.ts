@@ -1,20 +1,27 @@
 import axios from 'axios';
-import { SignupDTO } from '../interfaces';
-import { environments, authenticationEndpoints } from '../constants';
+import { SignupDTO, LoginDTO, ForgotPasswordDTO } from '../interfaces';
+import { authenticationEndpoints } from '../constants';
 
-const url =
-  process.env.NODE_ENV === 'production'
-    ? `${environments.production.server}`
-    : `${environments.development.server}`;
-
-export const registerService = async (payload: SignupDTO) => {
+export const register = async (payload: SignupDTO) => {
   return await axios({
-    url: `${url}/${authenticationEndpoints.SIGNUP}`,
+    url: `/${authenticationEndpoints.SIGNUP}`,
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+    data: JSON.stringify(payload),
+  });
+};
+
+export const login = async (payload: LoginDTO) => {
+  return await axios({
+    url: `/${authenticationEndpoints.LOGIN}`,
+    method: 'POST',
+    data: JSON.stringify(payload),
+  });
+};
+
+export const forgotPassword = async (payload: ForgotPasswordDTO) => {
+  return await axios({
+    url: `/${authenticationEndpoints.FORGOT_PASSWORD}`,
+    method: 'POST',
     data: JSON.stringify(payload),
   });
 };

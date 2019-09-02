@@ -1,9 +1,15 @@
-import React, { FunctionComponent, MouseEventHandler, ChangeEventHandler } from 'react';
+import React, {
+  FunctionComponent,
+  MouseEventHandler,
+  ChangeEventHandler,
+  FocusEventHandler,
+} from 'react';
 import { Button, InputGroup } from './';
 
 interface Props {
   show: boolean;
   processing: boolean;
+  disabled?: boolean;
   handleClose: MouseEventHandler<any>;
   type: 'email' | 'password';
   name: string;
@@ -17,11 +23,13 @@ interface Props {
   actionButtonText: string;
   actionButtonMethod: MouseEventHandler<any>;
   onChange: ChangeEventHandler<any>;
+  onBlur?: FocusEventHandler<any>;
 }
 
 export const Modal: FunctionComponent<Props> = ({
   show,
   processing,
+  disabled,
   handleClose,
   type,
   name,
@@ -35,6 +43,7 @@ export const Modal: FunctionComponent<Props> = ({
   actionButtonText,
   actionButtonMethod,
   onChange,
+  onBlur,
 }) => {
   return (
     <div style={show ? { display: 'flex' } : { display: 'none' }} className="modal-container">
@@ -55,6 +64,8 @@ export const Modal: FunctionComponent<Props> = ({
                 value={value}
                 placeholder={placeholder}
                 onChange={onChange}
+                onBlur={onBlur}
+                error={error}
               />
             </form>
           </div>
@@ -79,7 +90,7 @@ export const Modal: FunctionComponent<Props> = ({
             text={actionButtonText}
             onClick={actionButtonMethod}
             processing={processing}
-            disabled={processing}
+            disabled={disabled}
           />
         </div>
       </div>

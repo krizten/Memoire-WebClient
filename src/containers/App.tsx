@@ -1,10 +1,12 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer, Slide } from 'react-toastify';
 
-import { Landing, Login, Page404, Main } from './';
+import { Landing, Page404, Main } from './';
 import Signup from './Signup';
+import Login from './Login';
+import PrivateRoute from './PrivateRoute';
 import '../styles/app.scss';
-import { PrivateRoute } from '../components';
 
 export class App extends Component {
   render() {
@@ -15,10 +17,11 @@ export class App extends Component {
             <Route exact={true} path="/" component={Landing} />
             <Route exact={true} path="/signup" component={Signup} />
             <Route exact={true} path="/login" component={Login} />
-            <PrivateRoute isAuthenticated={!false} exact={false} path="/app" component={Main} />
+            <PrivateRoute exact={false} path="/app" component={Main} />
             <Route component={Page404} />
           </Switch>
         </div>
+        <ToastContainer closeButton={false} transition={Slide} />
       </Router>
     );
   }
