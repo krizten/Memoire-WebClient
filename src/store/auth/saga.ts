@@ -102,6 +102,7 @@ function* initialUserSaga({ payload }: ReturnType<any>) {
     } else {
       notify({ message: 'Internal server error occurred.' });
     }
+    window.localStorage && localStorage.removeItem('user_access');
   }
 }
 
