@@ -16,6 +16,7 @@ export enum AuthActionTypes {
   LOGIN_USER_SUCCESS = '@@auth/LOGIN_USER_SUCCESS',
   LOGIN_USER_FAIL = '@@auth/LOGIN_USER_FAIL',
   SET_CURRENT_USER = '@@auth/SET_CURRENT_USER',
+  SET_INITIAL_USER = '@@auth/SET_INITIAL_USER',
   FORGOT_PASSWORD = '@@auth/FORGOT_PASSWORD',
   FORGOT_PASSWORD_SUCCESS = '@@auth/FORGOT_PASSWORD_SUCCESS',
   FORGOT_PASSWORD_FAIL = '@@auth/FORGOT_PASSWORD_FAIL',
@@ -53,6 +54,10 @@ export interface SetCurrentUser extends Action {
   payload: User;
 }
 
+export interface SetInitialUser extends Action {
+  type: AuthActionTypes.SET_INITIAL_USER;
+}
+
 export interface ForgotPassword extends Action {
   type: AuthActionTypes.FORGOT_PASSWORD;
   payload: ForgotPasswordDTO;
@@ -78,6 +83,7 @@ export type AuthAction =
   | LoginUserSuccess
   | LoginUserFail
   | SetCurrentUser
+  | SetInitialUser
   | ForgotPassword
   | ForgotPasswordSuccess
   | ForgotPasswordFail
