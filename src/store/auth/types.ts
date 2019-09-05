@@ -56,6 +56,7 @@ export interface SetCurrentUser extends Action {
 
 export interface SetInitialUser extends Action {
   type: AuthActionTypes.SET_INITIAL_USER;
+  payload: string;
 }
 
 export interface ForgotPassword extends Action {

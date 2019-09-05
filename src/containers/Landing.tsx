@@ -1,10 +1,35 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 
 import { Anchor, Footer } from '../components';
 import logo from '../assets/img/logo+name.png';
+import { store } from '..';
+import { connect } from 'react-redux';
+import { AppState, ConnectedReduxProps } from '../store';
 
-export class Landing extends Component {
+interface State {}
+
+type AllProps = { isAuthenticated: boolean } & RouteComponentProps<{}> & ConnectedReduxProps;
+
+class Landing extends Component<AllProps, State> {
+  state: State = {};
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/app/entries');
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps: AllProps, prevState: State): State {
+    const nextState = {} as State;
+
+    if (nextProps.isAuthenticated) {
+      nextProps.history.push('/app/entries');
+    }
+
+    return nextState;
+  }
+
   render() {
     return (
       <div className="landing">
@@ -41,3 +66,9 @@ export class Landing extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ auth: { isAuthenticated } }: AppState) => ({
+  isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Landing);

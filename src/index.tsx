@@ -9,9 +9,9 @@ import { App } from './containers';
 import configureStore from './configureStore';
 import * as serviceWorker from './serviceWorker';
 
-const history = createHashHistory();
 const initialState = window.initialReduxState;
-const store = configureStore(history, initialState);
+const history = createHashHistory();
+export const store = configureStore(history, initialState);
 
 ReactDOM.render(
   <Provider store={store as any}>

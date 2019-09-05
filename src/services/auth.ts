@@ -18,6 +18,16 @@ export const login = async (payload: LoginDTO) => {
   });
 };
 
+export const checkUser = async (token: string) => {
+  return await axios({
+    url: `/${authenticationEndpoints.SELF}`,
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const forgotPassword = async (payload: ForgotPasswordDTO) => {
   return await axios({
     url: `/${authenticationEndpoints.FORGOT_PASSWORD}`,

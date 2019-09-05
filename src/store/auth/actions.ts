@@ -11,6 +11,8 @@ export const loginUser = (payload: LoginDTO) => action(AuthActionTypes.LOGIN_USE
 export const loginUserSuccess = () => action(AuthActionTypes.LOGIN_USER_SUCCESS);
 export const loginUserError = () => action(AuthActionTypes.LOGIN_USER_FAIL);
 
+export const setInitialUser = (payload: string) =>
+  action(AuthActionTypes.SET_INITIAL_USER, payload);
 export const setCurrentUser = (payload: User) => action(AuthActionTypes.SET_CURRENT_USER, payload);
 
 export const forgotPassword = (payload: ForgotPasswordDTO) =>
