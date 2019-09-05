@@ -1,6 +1,7 @@
 const authenticationEndpoints = {
   SIGNUP: 'auth/signup',
   LOGIN: 'auth/login',
+  SELF: 'auth/self',
   LOGOUT: 'auth/logout',
   CHANGE_PASSWORD: 'auth/change-password',
   FORGOT_PASSWORD: 'auth/forgot-password',
