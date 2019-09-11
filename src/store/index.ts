@@ -6,7 +6,8 @@ import { fork, all } from 'redux-saga/effects';
 import { AuthState } from './auth/types';
 import { authReducer } from './auth/reducer';
 import authSaga from './auth/saga';
-import { EntriesState, entriesReducer } from './entries';
+import { EntriesState } from './entries/types';
+import { entriesReducer } from './entries/reducer';
 import entriesSaga from './entries/saga';
 
 export interface AppState {

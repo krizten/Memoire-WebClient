@@ -2,10 +2,10 @@ import React, { FunctionComponent } from 'react';
 
 import { OutlineButton } from './';
 import { LocationSVG, DeleteSVG, EditSVG } from '../svg';
-import { IEntry } from '../interfaces';
+import { Entry } from '../interfaces';
 
 interface Props {
-  entry?: IEntry;
+  entry?: Entry;
 }
 
 export const EntryViewer: FunctionComponent<Props> = () => {

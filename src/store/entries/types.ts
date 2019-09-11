@@ -1,10 +1,14 @@
 import { Action } from 'redux';
+import { Entry } from '../../interfaces';
 
-export interface EntriesState {}
+export interface EntriesState {
+  entries: Entry[];
+}
 
 export enum EntriesActionTypes {
   ALL_ENTRIES = '@@entries/ALL_ENTRIES',
   ALL_ENTRIES_SUCCESS = '@@entries/ALL_ENTRIES_SUCCESS',
+  ALL_ENTRIES_FAIL = '@@entries/ALL_ENTRIES_FAIL',
 }
 
 export interface AllEntries extends Action {
@@ -13,6 +17,11 @@ export interface AllEntries extends Action {
 
 export interface AllEntriesSuccess extends Action {
   type: EntriesActionTypes.ALL_ENTRIES_SUCCESS;
+  payload: Entry[];
 }
 
-export type EntriesAction = AllEntries | AllEntriesSuccess;
+export interface AllEntriesFail extends Action {
+  type: EntriesActionTypes.ALL_ENTRIES_FAIL;
+}
+
+export type EntriesAction = AllEntries | AllEntriesSuccess | AllEntriesFail;

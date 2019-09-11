@@ -4,11 +4,12 @@ import { ToastContainer, Slide } from 'react-toastify';
 
 import { setInitialUser } from '../store/auth/actions';
 import { store } from '../';
-import { Page404, Main } from './';
+import { Page404 } from './';
 import Signup from './Signup';
 import Login from './Login';
 import Landing from './Landing';
 import PrivateRoute from './PrivateRoute';
+import Main from './Main';
 import '../styles/app.scss';
 
 export class App extends Component {

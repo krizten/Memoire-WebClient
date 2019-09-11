@@ -1,5 +1,4 @@
 export * from './App';
-export * from './Main';
 export * from './Page404';
 export * from './Entries';
 export * from './AddEntry';
