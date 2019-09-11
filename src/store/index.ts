@@ -6,9 +6,12 @@ import { fork, all } from 'redux-saga/effects';
 import { AuthState } from './auth/types';
 import { authReducer } from './auth/reducer';
 import authSaga from './auth/saga';
+import { EntriesState, entriesReducer } from './entries';
+import entriesSaga from './entries/saga';
 
 export interface AppState {
   auth: AuthState;
+  entries: EntriesState;
 }
 
 export interface ConnectedReduxProps<A extends Action = AnyAction> {
@@ -17,10 +20,11 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 
 export const createRootReducer = (history: History) =>
   combineReducers({
-    auth: authReducer,
     router: connectRouter(history),
+    auth: authReducer,
+    entries: entriesReducer,
   });
 
 export function* rootSaga() {
-  yield all([fork(authSaga)]);
+  yield all([fork(authSaga), fork(entriesSaga)]);
 }

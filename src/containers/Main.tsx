@@ -3,8 +3,13 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Sidenav } from '../components';
 import { Entries, AddEntry, EditEntry, Profile, Settings } from './';
+import { store } from '..';
+import { allEntries } from '../store/entries';
 
 export class Main extends Component {
+  componentDidMount() {
+    store.dispatch(allEntries());
+  }
   render() {
     return (
       <div className="main">
