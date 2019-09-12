@@ -62,10 +62,26 @@
         margin-bottom: 0;
       }
     }
-
-    &--empty {}
   }
 
+  .no-entries {
+    display: flex;
+    background-color: $color-entry;
+    align-items: center;
+    justify-content: center;
+    color: $color-grey-light;
+    font-family: $font-dosis;
+    font-size: 2.6rem;
+    line-height: 1;
+    font-weight: 600;
+    padding: 4rem;
+    border-radius: 1px;
+    margin-bottom: 1.5rem;
+
+    @include responsive(sm) {
+      margin: 1rem;
+    }
+  }
 
   &__viewer {
     flex-basis: 60%;
@@ -82,7 +98,7 @@
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     background-color: rgba($color-grey-darker, 0.7);
 
     @include responsive(sm) {

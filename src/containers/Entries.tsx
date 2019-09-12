@@ -8,6 +8,7 @@ import { AddSVG } from '../svg';
 import { Entry } from '../interfaces';
 import { AppState, ConnectedReduxProps } from '../store';
 import { getAllEntries } from '../store/entries/selectors';
+import { getAllEntries as getAllEntriesAction } from '../store/entries/actions';
 import search from '../assets/img/search.svg';
 import clear from '../assets/img/clear.svg';
 
@@ -20,34 +21,15 @@ interface PropsFromState {
 }
 
 interface PropsFromDispatch {
-  //
+  getAllEntries: typeof getAllEntriesAction;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
 
 class Entries extends Component<AllProps> {
-  state: State = {
-    entries: [],
-  };
-
   componentDidMount() {
-    console.log(this.props.entries);
+    this.props.getAllEntries();
   }
-
-  sample = () => {
-    let group = [];
-    for (let index = 0; index < 50; index++) {
-      group.push(
-        <EntrySummary
-          key={index}
-          date={new Date('2018-01-22T03:24:00')}
-          title="Lorem ipsum dolor sit amet."
-          content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam quia temporibus atque fuga maxime recusandae ex voluptate ad nobis ipsamrofeds..."
-        />
-      );
-    }
-    return group;
-  };
 
   addEntry = () => {
     this.props.history.push('/app/entries/new');
@@ -84,31 +66,31 @@ class Entries extends Component<AllProps> {
                 <AddSVG />
               </div>
             </div>
-            <div className="entries__list">{this.sample()}</div>
+            {entries.length > 0 ? (
+              <div className="entries__list scrollbar">
+                {entries
+                  .sort((a, b) => {
+                    const aDate = new Date(a.updated);
+                    const bDate = new Date(b.updated);
+                    return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
+                  })
+                  .map((entry: Entry, index: number) => (
+                    <EntrySummary
+                      key={index}
+                      date={new Date(`${entry.created}`)}
+                      title={entry.title}
+                      content={entry.content}
+                    />
+                  ))}
+              </div>
+            ) : (
+              <div className="no-entries">No Entries</div>
+            )}
           </div>
 
           <div className="entries__viewer">
             <EntryViewer />
           </div>
-
-          {/* <div>
-            {entries.length > 0 ? (
-              <div className="entries__list scrollbar">
-                {entries.map((entry: Entry, index: number) => (
-                  <EntrySummary
-                    key={index}
-                    date={new Date(`${entry.created}`)}
-                    title={entry.title}
-                    content={entry.content}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="entries__list entries_list--empty">
-                <p>No Entries</p>
-              </div>
-            )}
-          </div> */}
         </div>
       </div>
     );
@@ -120,7 +102,7 @@ const mapStateToProps = ({ entries }: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  //
+  getAllEntries: () => dispatch(getAllEntriesAction()),
 });
 
 export default connect(
