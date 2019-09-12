@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router';
@@ -9,11 +9,11 @@ import { Entry } from '../interfaces';
 import { AppState, ConnectedReduxProps } from '../store';
 import { getAllEntries } from '../store/entries/selectors';
 import { getAllEntries as getAllEntriesAction } from '../store/entries/actions';
-import search from '../assets/img/search.svg';
-import clear from '../assets/img/clear.svg';
+import searchIcon from '../assets/img/search.svg';
+import clearIcon from '../assets/img/clear.svg';
 
 interface State {
-  entries: Entry[];
+  search: string;
 }
 
 interface PropsFromState {
@@ -26,7 +26,11 @@ interface PropsFromDispatch {
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
 
-class Entries extends Component<AllProps> {
+class Entries extends Component<AllProps, State> {
+  state: State = {
+    search: '',
+  };
+
   componentDidMount() {
     this.props.getAllEntries();
   }
@@ -35,8 +39,28 @@ class Entries extends Component<AllProps> {
     this.props.history.push('/app/entries/new');
   };
 
+  onSearch = (e: any) => {
+    e.preventDefault();
+  };
+
+  onChange = (e: any) => {
+    if (e.target.value) {
+      // dispatch filter action
+    }
+    this.setState({
+      search: e.target.value,
+    });
+  };
+
+  clearSearch = () => {
+    this.setState({
+      search: '',
+    });
+  };
+
   render() {
     const { entries } = this.props;
+    const { search } = this.state;
     return (
       <div className="entries">
         <Header title="Entries" />
@@ -44,9 +68,9 @@ class Entries extends Component<AllProps> {
           <div className="entries__content">
             <div className="entries__search-container">
               <div className="entries__search">
-                <form>
+                <form onSubmit={this.onSearch}>
                   <button type="submit">
-                    <img src={search} alt="Search icon" />
+                    <img src={searchIcon} alt="Search icon" />
                   </button>
                   <input
                     id="search"
@@ -54,10 +78,12 @@ class Entries extends Component<AllProps> {
                     type="text"
                     placeholder="Search Entries..."
                     autoComplete="off"
+                    onChange={this.onChange}
+                    value={search}
                   />
-                  {!true && (
-                    <button type="button">
-                      <img src={clear} alt="Clear" />
+                  {search && (
+                    <button type="button" onClick={this.clearSearch}>
+                      <img src={clearIcon} alt="Clear" />
                     </button>
                   )}
                 </form>
@@ -77,7 +103,7 @@ class Entries extends Component<AllProps> {
                   .map((entry: Entry, index: number) => (
                     <EntrySummary
                       key={index}
-                      date={new Date(`${entry.created}`)}
+                      date={new Date(entry.updated)}
                       title={entry.title}
                       content={entry.content}
                     />
