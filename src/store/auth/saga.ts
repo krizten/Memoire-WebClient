@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import jwt_decode from 'jwt-decode';
 
 import { AuthActionTypes } from './types';
@@ -11,7 +11,7 @@ import {
   forgotPasswordSuccess,
   forgotPasswordError,
 } from './actions';
-import { register, login, setAuthHeader, forgotPassword } from '../../services';
+import { register, login, setAuthHeader, forgotPassword, checkUser } from '../../services';
 import { notify } from '../../utils';
 import { Token, User } from '../../interfaces';
 
@@ -81,7 +81,33 @@ function* forgotPasswordSaga({ payload }: ReturnType<any>) {
   }
 }
 
+function* initialUserSaga({ payload }: ReturnType<any>) {
+  try {
+    const response = yield call(checkUser, payload);
+    const { data } = response.data;
+    const { created } = data;
+    setAuthHeader(payload);
+    const { id, email, iat, exp } = jwt_decode(payload) as Token;
+    const user: User = {
+      id,
+      email,
+      created: new Date(created),
+      issued: new Date(iat),
+      expires: new Date(exp),
+    };
+    yield put(setCurrentUser(user));
+  } catch (err) {
+    if (err.response) {
+      notify({ message: err.response.data.error.message });
+    } else {
+      notify({ message: 'Internal server error occurred.' });
+    }
+    window.localStorage && localStorage.removeItem('user_access');
+  }
+}
+
 function* authWatcherSaga() {
+  yield takeLatest(AuthActionTypes.SET_INITIAL_USER, initialUserSaga);
   yield takeLatest(AuthActionTypes.SIGNUP_USER, signupSaga);
   yield takeLatest(AuthActionTypes.LOGIN_USER, loginSaga);
   yield takeLatest(AuthActionTypes.FORGOT_PASSWORD, forgotPasswordSaga);

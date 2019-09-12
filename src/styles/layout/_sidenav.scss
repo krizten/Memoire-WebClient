@@ -123,5 +123,10 @@
 
   .logout {
     cursor: pointer;
+
+    &:hover::before {
+      background-color: transparent;
+      width: 0;
+    }
   }
 }

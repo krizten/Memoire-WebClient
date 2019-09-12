@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { Sidenav } from '../components';
-import { Entries, AddEntry, EditEntry, Profile, Settings } from './';
+import { AddEntry, EditEntry, Profile, Settings } from './';
+import Entries from './Entries';
+import { getAllEntries } from '../store/entries/actions';
 
-export class Main extends Component {
+interface Props {
+  getAllEntries: typeof getAllEntries;
+}
+
+class Main extends Component<Props, {}> {
+  constructor(props: any) {
+    super(props);
+    this.props.getAllEntries();
+  }
+
   render() {
     return (
       <div className="main">
@@ -22,3 +35,12 @@ export class Main extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  getAllEntries: () => dispatch(getAllEntries()),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Main);

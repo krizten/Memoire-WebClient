@@ -1,62 +1,93 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { RouteComponentProps } from 'react-router';
 
-import { EntrySummary, EntryViewer } from '../components';
+import { EntrySummary, EntryViewer, Header } from '../components';
 import { AddSVG } from '../svg';
-
+import { Entry } from '../interfaces';
+import { AppState, ConnectedReduxProps } from '../store';
+import { getAllEntries } from '../store/entries/selectors';
+import { getAllEntries as getAllEntriesAction } from '../store/entries/actions';
 import search from '../assets/img/search.svg';
 import clear from '../assets/img/clear.svg';
 
-interface State {}
+interface State {
+  entries: Entry[];
+}
 
-export class Entries extends Component<{ history: any }, State> {
-  sample = () => {
-    let group = [];
-    for (let index = 0; index < 20; index++) {
-      group.push(
-        <EntrySummary
-          key={index}
-          date={new Date('2018-01-22T03:24:00')}
-          title="Lorem ipsum dolor sit amet."
-          content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam quia temporibus atque fuga maxime recusandae ex voluptate ad nobis ipsamrofeds..."
-        />
-      );
-    }
-    return group;
-  };
+interface PropsFromState {
+  entries: Entry[];
+}
+
+interface PropsFromDispatch {
+  getAllEntries: typeof getAllEntriesAction;
+}
+
+type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
+
+class Entries extends Component<AllProps> {
+  componentDidMount() {
+    this.props.getAllEntries();
+  }
 
   addEntry = () => {
     this.props.history.push('/app/entries/new');
   };
 
   render() {
+    const { entries } = this.props;
     return (
       <div className="entries">
-        <div className="entries__header">
-          <div className="entries__search">
-            <form>
-              <button type="submit">
-                <img src={search} alt="Search icon" />
-              </button>
-              <input
-                id="search"
-                name="search"
-                type="text"
-                placeholder="Search Entries..."
-                autoComplete="off"
-              />
-              {!true && (
-                <button type="button">
-                  <img src={clear} alt="Clear" />
-                </button>
-              )}
-            </form>
-          </div>
-          <div className="entries__add" onClick={this.addEntry}>
-            <AddSVG />
-          </div>
-        </div>
+        <Header title="Entries" />
         <div className="entries__main">
-          <div className="entries__list scrollbar">{this.sample()}</div>
+          <div className="entries__content">
+            <div className="entries__search-container">
+              <div className="entries__search">
+                <form>
+                  <button type="submit">
+                    <img src={search} alt="Search icon" />
+                  </button>
+                  <input
+                    id="search"
+                    name="search"
+                    type="text"
+                    placeholder="Search Entries..."
+                    autoComplete="off"
+                  />
+                  {!true && (
+                    <button type="button">
+                      <img src={clear} alt="Clear" />
+                    </button>
+                  )}
+                </form>
+              </div>
+              <div className="entries__add" onClick={this.addEntry}>
+                <AddSVG />
+              </div>
+            </div>
+            {entries.length > 0 ? (
+              <div className="entries__list scrollbar">
+                {entries
+                  .sort((a, b) => {
+                    const aDate = new Date(a.updated);
+                    const bDate = new Date(b.updated);
+                    return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
+                  })
+                  .map((entry: Entry, index: number) => (
+                    <EntrySummary
+                      key={index}
+                      date={new Date(`${entry.created}`)}
+                      title={entry.title}
+                      content={entry.content}
+                    />
+                  ))}
+              </div>
+            ) : (
+              <div className="no-entries">No Entries</div>
+            )}
+          </div>
+
           <div className="entries__viewer">
             <EntryViewer />
           </div>
@@ -65,3 +96,16 @@ export class Entries extends Component<{ history: any }, State> {
     );
   }
 }
+
+const mapStateToProps = ({ entries }: AppState) => ({
+  entries: getAllEntries(entries),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  getAllEntries: () => dispatch(getAllEntriesAction()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Entries);
