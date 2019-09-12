@@ -44,9 +44,6 @@ class Entries extends Component<AllProps, State> {
   };
 
   onChange = (e: any) => {
-    if (e.target.value) {
-      // dispatch filter action
-    }
     this.setState({
       search: e.target.value,
     });
@@ -59,8 +56,8 @@ class Entries extends Component<AllProps, State> {
   };
 
   render() {
-    const { entries } = this.props;
     const { search } = this.state;
+    const { entries } = this.props;
     return (
       <div className="entries">
         <Header title="Entries" />
@@ -95,6 +92,9 @@ class Entries extends Component<AllProps, State> {
             {entries.length > 0 ? (
               <div className="entries__list scrollbar">
                 {entries
+                  .filter((entry: Entry) =>
+                    entry.title.toLowerCase().includes(search.toLowerCase())
+                  )
                   .sort((a, b) => {
                     const aDate = new Date(a.updated);
                     const bDate = new Date(b.updated);
