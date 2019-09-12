@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-
-import { Sidenav } from '../components';
-import { Entries, AddEntry, EditEntry, Profile, Settings } from './';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+
+import { Sidenav } from '../components';
+import { AddEntry, EditEntry, Profile, Settings } from './';
+import Entries from './Entries';
 import { getAllEntries } from '../store/entries/actions';
 
 interface Props {
@@ -12,7 +13,8 @@ interface Props {
 }
 
 class Main extends Component<Props, {}> {
-  componentDidMount() {
+  constructor(props: any) {
+    super(props);
     this.props.getAllEntries();
   }
 
