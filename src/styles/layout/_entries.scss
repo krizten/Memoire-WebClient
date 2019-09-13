@@ -51,15 +51,25 @@
       flex-basis: auto;
       max-height: 40rem;
       margin-bottom: 1.5rem;
+      margin-right: 2rem;
+      margin-left: 2rem;
     }
 
     >div {
       &:first-child {
         margin-top: 0;
+
+        @include responsive(sm) {
+          margin-left: 0;
+        }
       }
 
       &:last-child {
         margin-bottom: 0;
+
+        @include responsive(sm) {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -90,17 +100,18 @@
 
     @include responsive(sm) {
       flex-basis: auto;
+      margin-left: 0;
     }
   }
 
   &__search-container {
-    background-color: $color-grey-dark;
+    background-color: rgba($color-grey-darker, 0.7);
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 1rem 2rem;
     margin-bottom: 1rem;
-    background-color: rgba($color-grey-darker, 0.7);
+    margin-right: 0.5rem;
 
     @include responsive(sm) {
       padding: 1.5rem 2rem;

@@ -8,6 +8,11 @@
   align-items: center;
   justify-content: center;
 
+  @include responsive(sm) {
+    background-color: $color-white;
+    margin-top: 4rem;
+  }
+
 
   &__image {
     text-align: center;
