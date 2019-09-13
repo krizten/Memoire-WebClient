@@ -7,8 +7,8 @@ import { EntrySummary, EntryViewer, Header } from '../components';
 import { AddSVG } from '../svg';
 import { Entry } from '../interfaces';
 import { AppState, ConnectedReduxProps } from '../store';
-import { getAllEntries } from '../store/entries/selectors';
-import { getAllEntries as getAllEntriesAction } from '../store/entries/actions';
+import { getAllEntries, getCurrentEntry } from '../store/entries/selectors';
+import { getAllEntries as getAllEntriesAction, setCurrentEntry } from '../store/entries/actions';
 import searchIcon from '../assets/img/search.svg';
 import clearIcon from '../assets/img/clear.svg';
 
@@ -18,10 +18,12 @@ interface State {
 
 interface PropsFromState {
   entries: Entry[];
+  currentEntry: Entry | null;
 }
 
 interface PropsFromDispatch {
   getAllEntries: typeof getAllEntriesAction;
+  setCurrentEntry: typeof setCurrentEntry;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
@@ -56,12 +58,12 @@ class Entries extends Component<AllProps, State> {
   };
 
   selectEntry = (entry: Entry) => {
-    console.log(entry);
+    this.props.setCurrentEntry(entry);
   };
 
   render() {
     const { search } = this.state;
-    const { entries } = this.props;
+    const { entries, currentEntry } = this.props;
     return (
       <div className="entries">
         <Header title="Entries" />
@@ -130,10 +132,12 @@ class Entries extends Component<AllProps, State> {
 
 const mapStateToProps = ({ entries }: AppState) => ({
   entries: getAllEntries(entries),
+  currentEntry: getCurrentEntry(entries),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getAllEntries: () => dispatch(getAllEntriesAction()),
+  setCurrentEntry: (payload: Entry) => dispatch(setCurrentEntry(payload)),
 });
 
 export default connect(
