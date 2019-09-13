@@ -16,7 +16,6 @@ const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
   return (
     <Route
       {...rest}
-      // tslint:disable-next-line: jsx-no-lambda
       render={routeProps =>
         isAuthenticated ? (
           <Component {...routeProps} />

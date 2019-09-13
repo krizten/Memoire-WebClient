@@ -55,6 +55,10 @@ class Entries extends Component<AllProps, State> {
     });
   };
 
+  selectEntry = (entry: Entry) => {
+    console.log(entry);
+  };
+
   render() {
     const { search } = this.state;
     const { entries } = this.props;
@@ -100,12 +104,13 @@ class Entries extends Component<AllProps, State> {
                     const bDate = new Date(b.updated);
                     return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
                   })
-                  .map((entry: Entry, index: number) => (
+                  .map((entry: Entry) => (
                     <EntrySummary
-                      key={index}
+                      key={entry.id}
                       date={new Date(entry.updated)}
                       title={entry.title}
                       content={entry.content}
+                      onClick={() => this.selectEntry(entry)}
                     />
                   ))}
               </div>
