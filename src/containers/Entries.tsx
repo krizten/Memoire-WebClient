@@ -122,7 +122,7 @@ class Entries extends Component<AllProps, State> {
           </div>
 
           <div className="entries__viewer">
-            <EntryViewer placeholderOnClick={this.addEntry} />
+            <EntryViewer entry={currentEntry} placeholderOnClick={this.addEntry} />
           </div>
         </div>
       </div>

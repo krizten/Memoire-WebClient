@@ -157,6 +157,7 @@
         padding-left: 1rem;
         padding-right: 1rem;
         font-family: $font-montserrat;
+        color: rgba($color-grey-light, 0.5);
 
         @include responsive(sm) {
           padding: 1rem;

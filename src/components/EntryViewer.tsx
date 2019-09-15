@@ -3,13 +3,20 @@ import React, { FunctionComponent, Fragment, MouseEventHandler } from 'react';
 import { OutlineButton, EntryViewerPlaceholder } from './';
 import { LocationSVG } from '../svg';
 import { Entry } from '../interfaces';
+import { getDayOfTheWeek, getMonthFull, getOrdinalSuffix } from '../utils';
 
 interface Props {
-  entry?: Entry;
+  entry: Entry | null;
   placeholderOnClick: MouseEventHandler<any>;
 }
 
+const formatDate = (date: Date) =>
+  `${getDayOfTheWeek(date.getDay())}, ${getMonthFull(date.getMonth())} ${getOrdinalSuffix(
+    date.getDate()
+  )}, ${date.getFullYear()}`;
+
 export const EntryViewer: FunctionComponent<Props> = ({ entry, placeholderOnClick }) => {
+  const date = entry ? new Date(entry.created) : new Date();
   return (
     <div className="viewer">
       {entry ? (
@@ -25,19 +32,16 @@ export const EntryViewer: FunctionComponent<Props> = ({ entry, placeholderOnClic
           <div className="viewer__entry scrollbar">
             <div className="entry">
               <div className="entry__date-location">
-                <p className="entry__date">Thursday, January 22nd, 2019</p>
+                <p className="entry__date">{formatDate(date)}</p>
                 <p className="entry__location">
                   <LocationSVG />
                   <span>Lagos, NG</span>
                 </p>
               </div>
-              <h3 className="entry__title">Lorem ipsum dolor</h3>
+              <h3 className="entry__title">{entry.title}</h3>
               <div className="entry__content">
                 <div className="entry__image">
-                  <img
-                    src={`https://images.unsplash.com/photo-1513618827672-0d7c5ad591b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80`}
-                    alt=""
-                  />
+                  {entry.image ? <img src={`${entry.image}`} alt="" /> : null}
                 </div>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo

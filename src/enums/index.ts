@@ -1,1 +1,1 @@
-export * from './months';
+export * from './date';
