@@ -115,6 +115,7 @@
 
     @include responsive(sm) {
       padding: 1.5rem 2rem;
+      margin-right: 0;
     }
   }
 

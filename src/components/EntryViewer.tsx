@@ -43,55 +43,9 @@ export const EntryViewer: FunctionComponent<Props> = ({ entry, placeholderOnClic
                 <div className="entry__image">
                   {entry.image ? <img src={`${entry.image}`} alt="" /> : null}
                 </div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo
-                  eveniet dolores fugit alias voluptates odit quo voluptate iure molestias
-                  necessitatibus temporibus ipsam magnam esse eos saepe nobis perferendis officia,
-                  pariatur rem est quasi, nemo quis! Saepe excepturi pariatur harum temporibus!
-                  Assumenda deleniti id esse officia impedit ratione soluta?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo
-                  eveniet dolores fugit alias voluptates odit quo voluptate iure molestias
-                  necessitatibus temporibus ipsam magnam esse eos saepe nobis perferendis officia,
-                  pariatur rem est quasi, nemo quis! Saepe excepturi pariatur harum temporibus!
-                  Assumenda deleniti id esse officia impedit ratione soluta?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo
-                  eveniet dolores fugit alias voluptates odit quo voluptate iure molestias
-                  necessitatibus temporibus ipsam magnam esse eos saepe nobis perferendis officia,
-                  pariatur rem est quasi, nemo quis! Saepe excepturi pariatur harum temporibus!
-                  Assumenda deleniti id esse officia impedit ratione soluta?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo
-                  eveniet dolores fugit alias voluptates odit quo voluptate iure molestias
-                  necessitatibus temporibus ipsam magnam esse eos saepe nobis perferendis officia,
-                  pariatur rem est quasi, nemo quis! Saepe excepturi pariatur harum temporibus!
-                  Assumenda deleniti id esse officia impedit ratione soluta?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo
-                  eveniet dolores fugit alias voluptates odit quo voluptate iure molestias
-                  necessitatibus temporibus ipsam magnam esse eos saepe nobis perferendis officia,
-                  pariatur rem est quasi, nemo quis! Saepe excepturi pariatur harum temporibus!
-                  Assumenda deleniti id esse officia impedit ratione soluta?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo
-                  eveniet dolores fugit alias voluptates odit quo voluptate iure molestias
-                  necessitatibus temporibus ipsam magnam esse eos saepe nobis perferendis officia,
-                  pariatur rem est quasi, nemo quis! Saepe excepturi pariatur harum temporibus!
-                  Assumenda deleniti id esse officia impedit ratione soluta?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam minus explicabo
-                  eveniet dolores fugit alias voluptates odit quo voluptate iure molestias
-                  necessitatibus temporibus ipsam magnam esse eos saepe nobis perferendis officia,
-                  pariatur rem est quasi, nemo quis! Saepe excepturi pariatur harum temporibus!
-                  Assumenda deleniti id esse officia impedit ratione soluta?
-                </p>
+                {entry.content.split('\n').map((paragraph: string, index: number) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
               </div>
             </div>
           </div>

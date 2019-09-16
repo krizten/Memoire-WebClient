@@ -34,6 +34,7 @@ class Entries extends Component<AllProps, State> {
   };
 
   componentDidMount() {
+    document.title = 'Memoire | Entries';
     this.props.getAllEntries();
   }
 
