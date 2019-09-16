@@ -2,8 +2,8 @@ import { Coordinates } from './coordinates';
 
 export interface Entry {
   id: string;
-  created: Date;
-  updated: Date;
+  created: string;
+  updated: string;
   title: string;
   content: string;
   image?: string;

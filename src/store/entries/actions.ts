@@ -7,3 +7,6 @@ export const getAllEntries = () => action(EntriesActionTypes.ALL_ENTRIES);
 export const getAllEntriesSuccess = (payload: Entry[]) =>
   action(EntriesActionTypes.ALL_ENTRIES_SUCCESS, payload);
 export const getAllEntriesError = () => action(EntriesActionTypes.ALL_ENTRIES_FAIL);
+
+export const setCurrentEntry = (payload: Entry) =>
+  action(EntriesActionTypes.SET_CURRENT_ENTRY, payload);

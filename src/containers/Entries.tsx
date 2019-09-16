@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router';
@@ -7,27 +7,34 @@ import { EntrySummary, EntryViewer, Header } from '../components';
 import { AddSVG } from '../svg';
 import { Entry } from '../interfaces';
 import { AppState, ConnectedReduxProps } from '../store';
-import { getAllEntries } from '../store/entries/selectors';
-import { getAllEntries as getAllEntriesAction } from '../store/entries/actions';
-import search from '../assets/img/search.svg';
-import clear from '../assets/img/clear.svg';
+import { getAllEntries, getCurrentEntry } from '../store/entries/selectors';
+import { getAllEntries as getAllEntriesAction, setCurrentEntry } from '../store/entries/actions';
+import searchIcon from '../assets/img/search.svg';
+import clearIcon from '../assets/img/clear.svg';
 
 interface State {
-  entries: Entry[];
+  search: string;
 }
 
 interface PropsFromState {
   entries: Entry[];
+  currentEntry: Entry | null;
 }
 
 interface PropsFromDispatch {
   getAllEntries: typeof getAllEntriesAction;
+  setCurrentEntry: typeof setCurrentEntry;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
 
-class Entries extends Component<AllProps> {
+class Entries extends Component<AllProps, State> {
+  state: State = {
+    search: '',
+  };
+
   componentDidMount() {
+    document.title = 'Memoire | Entries';
     this.props.getAllEntries();
   }
 
@@ -35,8 +42,29 @@ class Entries extends Component<AllProps> {
     this.props.history.push('/app/entries/new');
   };
 
+  onSearch = (e: any) => {
+    e.preventDefault();
+  };
+
+  onChange = (e: any) => {
+    this.setState({
+      search: e.target.value,
+    });
+  };
+
+  clearSearch = () => {
+    this.setState({
+      search: '',
+    });
+  };
+
+  selectEntry = (entry: Entry) => {
+    this.props.setCurrentEntry(entry);
+  };
+
   render() {
-    const { entries } = this.props;
+    const { search } = this.state;
+    const { entries, currentEntry } = this.props;
     return (
       <div className="entries">
         <Header title="Entries" />
@@ -44,9 +72,9 @@ class Entries extends Component<AllProps> {
           <div className="entries__content">
             <div className="entries__search-container">
               <div className="entries__search">
-                <form>
+                <form onSubmit={this.onSearch}>
                   <button type="submit">
-                    <img src={search} alt="Search icon" />
+                    <img src={searchIcon} alt="Search icon" />
                   </button>
                   <input
                     id="search"
@@ -54,10 +82,12 @@ class Entries extends Component<AllProps> {
                     type="text"
                     placeholder="Search Entries..."
                     autoComplete="off"
+                    onChange={this.onChange}
+                    value={search}
                   />
-                  {!true && (
-                    <button type="button">
-                      <img src={clear} alt="Clear" />
+                  {search && (
+                    <button type="button" onClick={this.clearSearch}>
+                      <img src={clearIcon} alt="Clear" />
                     </button>
                   )}
                 </form>
@@ -69,17 +99,21 @@ class Entries extends Component<AllProps> {
             {entries.length > 0 ? (
               <div className="entries__list scrollbar">
                 {entries
+                  .filter((entry: Entry) =>
+                    entry.title.toLowerCase().includes(search.toLowerCase())
+                  )
                   .sort((a, b) => {
                     const aDate = new Date(a.updated);
                     const bDate = new Date(b.updated);
                     return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
                   })
-                  .map((entry: Entry, index: number) => (
+                  .map((entry: Entry) => (
                     <EntrySummary
-                      key={index}
-                      date={new Date(`${entry.created}`)}
+                      key={entry.id}
+                      date={new Date(entry.updated)}
                       title={entry.title}
                       content={entry.content}
+                      onClick={() => this.selectEntry(entry)}
                     />
                   ))}
               </div>
@@ -89,7 +123,7 @@ class Entries extends Component<AllProps> {
           </div>
 
           <div className="entries__viewer">
-            <EntryViewer />
+            <EntryViewer entry={currentEntry} placeholderOnClick={this.addEntry} />
           </div>
         </div>
       </div>
@@ -99,10 +133,12 @@ class Entries extends Component<AllProps> {
 
 const mapStateToProps = ({ entries }: AppState) => ({
   entries: getAllEntries(entries),
+  currentEntry: getCurrentEntry(entries),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getAllEntries: () => dispatch(getAllEntriesAction()),
+  setCurrentEntry: (payload: Entry) => dispatch(setCurrentEntry(payload)),
 });
 
 export default connect(
