@@ -10,34 +10,55 @@ interface Props {
   mode: 'new' | 'update';
 }
 
-interface State {}
+interface State {
+  title: string;
+  content: string;
+  image?: string;
+}
 
 export class EntryEditor extends Component<Props, State> {
-  clickBtn = () => {
-    toast('😁️ Testing Toast Component', {
-      position: 'top-center',
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+  state: State = {
+    title: '',
+    content: '',
+  };
+
+  onChange = (e: any) => {
+    switch (e.target.name) {
+      case 'title':
+        this.setState({ title: e.target.value });
+        break;
+      case 'content':
+        this.setState({ content: e.target.value });
+        break;
+    }
+  };
+
+  onSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
+  onSave = (e: any) => {
+    const entry: State = {
+      title: this.state.title,
+      content: this.state.content.replace(/\n{1,}\s*?\n{1,}/g, '\n').trim(),
+    };
   };
 
   render() {
     const { mode } = this.props;
+    const { title, content } = this.state;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Header title={mode === 'new' ? 'Add Entry' : 'Edit Entry'} />
         <div className="editor">
           <div className="editor__main">
             <div className="editor__controls">
-              <OutlineButton onClick={this.clickBtn} type="button">
+              <OutlineButton type="button" onClick={this.onSave}>
                 <span className="mr-3">Save</span> <i className="fas fa-save" />
               </OutlineButton>
             </div>
             <div className="editor__entry">
-              <form action="" className="entry">
+              <form onSubmit={this.onSubmit} className="entry">
                 <div className="entry__date-location">
                   <p className="entry__date">Thursday, January 22nd, 2019</p>
                   <p className="entry__location">
@@ -45,16 +66,25 @@ export class EntryEditor extends Component<Props, State> {
                     <span>{'Not Available'}</span>
                   </p>
                 </div>
-                <input className="entry__title" placeholder="Title" />
+                <input
+                  type="text"
+                  name="title"
+                  className="entry__title"
+                  placeholder="Title"
+                  autoComplete="off"
+                  value={title}
+                  onChange={this.onChange}
+                />
                 <div className="entry__content">
                   <textarea
                     className="scrollbar"
-                    name=""
-                    id=""
+                    name="content"
                     cols={30}
                     rows={10}
                     spellCheck={false}
                     placeholder="Write your thoughts..."
+                    value={content}
+                    onChange={this.onChange}
                   />
                 </div>
               </form>
