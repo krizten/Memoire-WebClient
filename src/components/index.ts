@@ -8,7 +8,6 @@ export * from './Sidenav';
 export * from './EntrySummary';
 export * from './EntryViewer';
 export * from './OutlineButton';
-export * from './EntryEditor';
 export * from './ImageUploader';
 export * from './ImagePicker';
 export * from './ProfileViewer';

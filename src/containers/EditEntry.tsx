@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { EntryEditor } from '../components';
+
+import EntryEditor from '../components/EntryEditor';
 
 interface Props {}
 

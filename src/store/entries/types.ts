@@ -4,6 +4,7 @@ import { Entry, EntryDTO } from '../../interfaces';
 export interface EntriesState {
   entries: Entry[];
   currentEntry: Entry | null;
+  loading: boolean;
 }
 
 export enum EntriesActionTypes {

@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { Sidenav } from '../components';
-import { AddEntry, EditEntry, Profile, Settings } from './';
-import Entries from './Entries';
+import { EditEntry, Profile, Settings } from './';
 import { getAllEntries } from '../store/entries/actions';
+import Entries from './Entries';
+import AddEntry from './AddEntry';
 
 interface Props {
   getAllEntries: typeof getAllEntries;

@@ -2,9 +2,9 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import { notify } from '../../utils';
 import { EntriesActionTypes } from './types';
-import { allEntries } from '../../services';
+import { allEntries, addEntry } from '../../services';
 import { Entry } from '../../interfaces';
-import { getAllEntriesSuccess, getAllEntriesError } from './actions';
+import { getAllEntriesSuccess, getAllEntriesError, addEntrySuccess } from './actions';
 
 function* allEntriesSaga() {
   try {
@@ -22,8 +22,19 @@ function* allEntriesSaga() {
   }
 }
 
+function* addEntrySaga({ payload }: ReturnType<any>) {
+  try {
+    const response = yield call(addEntry, payload);
+    console.log(response.data);
+    // yield put(addEntrySuccess())
+  } catch (err) {
+    //
+  }
+}
+
 function* entriesWatcherSaga() {
   yield takeLatest(EntriesActionTypes.ALL_ENTRIES, allEntriesSaga);
+  yield takeLatest(EntriesActionTypes.ADD_ENTRY, addEntrySaga);
 }
 
 function* entriesSaga() {

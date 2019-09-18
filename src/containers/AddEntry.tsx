@@ -1,12 +1,128 @@
 import React, { Component } from 'react';
-import { EntryEditor } from '../components';
 
-interface Props {}
+import { OutlineButton, Header } from '../components';
+import { LocationSVG } from '../svg';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { EntryDTO } from '../interfaces';
+import { addEntry } from '../store/entries/actions';
+import { AppState, ConnectedReduxProps } from '../store';
+import { getLoading } from '../store/entries/selectors';
+import { RouteComponentProps } from 'react-router';
 
-interface State {}
+interface State {
+  title: string;
+  content: string;
+  image?: string;
+}
 
-export class AddEntry extends Component<Props, State> {
+interface PropsFromState {
+  loading?: boolean;
+}
+
+interface PropsFromDispatch {
+  addEntry?: typeof addEntry;
+}
+
+type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
+
+class EntryEditor extends Component<AllProps, State> {
+  state: State = {
+    title: '',
+    content: '',
+  };
+
+  onChange = (e: any) => {
+    switch (e.target.name) {
+      case 'title':
+        this.setState({ title: e.target.value });
+        break;
+      case 'content':
+        this.setState({ content: e.target.value });
+        break;
+    }
+  };
+
+  onSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
+  onSave = (e: any) => {
+    const entry: State = {
+      title: this.state.title,
+      content: this.state.content.replace(/\n{1,}\s*?\n{1,}/g, '\n').trim(),
+    };
+  };
+
+  handleBack = () => {};
+
   render() {
-    return <EntryEditor mode="new" />;
+    const { title, content } = this.state;
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Header title="Edit Entry" />
+        <div className="editor">
+          <div className="editor__main">
+            <div className="editor__controls">
+              <OutlineButton type="button" className="outline-button--secondary px-4">
+                <i className="fas fa-arrow-circle-left" />
+                <span className="ml-3">Back</span>
+              </OutlineButton>
+              <OutlineButton type="button" onClick={this.onSave}>
+                <span className="mr-3">Save</span> <i className="fas fa-save" />
+              </OutlineButton>
+            </div>
+            <div className="editor__entry">
+              <form onSubmit={this.onSubmit} className="entry">
+                <div className="entry__date-location">
+                  <p className="entry__date">Thursday, January 22nd, 2019</p>
+                  <p className="entry__location">
+                    <LocationSVG />
+                    <span>{'Not Available'}</span>
+                  </p>
+                </div>
+                <input
+                  type="text"
+                  name="title"
+                  className="entry__title"
+                  placeholder="Title"
+                  autoComplete="off"
+                  value={title}
+                  onChange={this.onChange}
+                />
+                <div className="entry__content">
+                  <textarea
+                    className="scrollbar"
+                    name="content"
+                    cols={30}
+                    rows={10}
+                    spellCheck={false}
+                    placeholder="Write your thoughts..."
+                    value={content}
+                    onChange={this.onChange}
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+          {/* <div className="editor__upload">
+            TO-DO: Enable Image Upload feature
+          </div> */}
+        </div>
+      </div>
+    );
   }
 }
+
+const mapStateToProps = ({ entries }: AppState) => ({
+  isLoading: getLoading(entries),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addEntry: (payload: EntryDTO) => dispatch(addEntry(payload)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EntryEditor);

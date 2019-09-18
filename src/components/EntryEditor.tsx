@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 
-import { OutlineButton, Button } from './';
+import { OutlineButton } from './';
 import { LocationSVG } from '../svg';
-import { ImageUploader } from './ImageUploader';
 import { Header } from './Header';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { EntryDTO } from '../interfaces';
+import { addEntry } from '../store/entries/actions';
+import { AppState, ConnectedReduxProps } from '../store';
+import { getLoading } from '../store/entries/selectors';
+import { RouteComponentProps } from 'react-router';
 
 interface Props {
   mode: 'new' | 'update';
@@ -16,7 +21,19 @@ interface State {
   image?: string;
 }
 
-export class EntryEditor extends Component<Props, State> {
+interface PropsFromState {
+  loading?: boolean;
+}
+
+interface PropsFromDispatch {
+  addEntry?: typeof addEntry;
+}
+
+type AllProps = Props & PropsFromState & PropsFromDispatch;
+// RouteComponentProps<{}> &
+// ConnectedReduxProps;
+
+class EntryEditor extends Component<AllProps, State> {
   state: State = {
     title: '',
     content: '',
@@ -107,3 +124,16 @@ export class EntryEditor extends Component<Props, State> {
     );
   }
 }
+
+const mapStateToProps = ({ entries }: AppState) => ({
+  isLoading: getLoading(entries),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addEntry: (payload: EntryDTO) => dispatch(addEntry(payload)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EntryEditor);
