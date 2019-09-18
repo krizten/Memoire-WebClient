@@ -60,7 +60,7 @@ class AddEntry extends Component<AllProps, State> {
     const { title, content } = this.state;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <Header title="Edit Entry" />
+        <Header title="Add Entry" />
         <div className="editor">
           <div className="editor__main">
             <div className="editor__controls">
