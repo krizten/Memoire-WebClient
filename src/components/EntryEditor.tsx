@@ -90,11 +90,12 @@ export class EntryEditor extends Component<Props, State> {
               </form>
             </div>
           </div>
-          <div className="editor__upload">
+          {/* TO-DO: Enable Image Upload feature */}
+          {/* <div className="editor__upload">
             <ImageUploader
               image={`https://images.unsplash.com/photo-1513618827672-0d7c5ad591b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80`}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     );

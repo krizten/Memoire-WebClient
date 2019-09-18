@@ -2,14 +2,16 @@
   height: 100%;
   width: 100%;
   display: flex;
+
   @include responsive(sm) {
-    display: block;
+    flex-direction: column;
   }
 
   &__sidenav {
     flex-basis: 10%;
+
     @include responsive(sm) {
-      display: block;
+      display: flex;
     }
   }
 
