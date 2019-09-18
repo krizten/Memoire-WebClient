@@ -7,7 +7,7 @@ import { Dispatch } from 'redux';
 import { EntryDTO } from '../interfaces';
 import { addEntry } from '../store/entries/actions';
 import { AppState, ConnectedReduxProps } from '../store';
-import { getLoading } from '../store/entries/selectors';
+import { getLoading, getStatus } from '../store/entries/selectors';
 import { RouteComponentProps } from 'react-router';
 
 interface State {
@@ -17,11 +17,12 @@ interface State {
 }
 
 interface PropsFromState {
-  loading?: boolean;
+  loading: boolean;
+  status: boolean;
 }
 
 interface PropsFromDispatch {
-  addEntry?: typeof addEntry;
+  addEntry: typeof addEntry;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
@@ -43,6 +44,20 @@ class AddEntry extends Component<AllProps, State> {
     }
   };
 
+  componentDidMount() {
+    document.title = 'Memoire | Add Entry';
+  }
+
+  static getDerivedStateFromProps(nextProps: AllProps, prevState: State): State {
+    const nextState = {} as State;
+
+    if (nextProps.status) {
+      nextProps.history.push('/app/entries');
+    }
+
+    return nextState;
+  }
+
   onSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -52,24 +67,34 @@ class AddEntry extends Component<AllProps, State> {
       title: this.state.title,
       content: this.state.content.replace(/\n{1,}\s*?\n{1,}/g, '\n').trim(),
     };
+    this.props.addEntry(entry);
   };
 
-  handleBack = () => {};
+  goToEntries = () => {
+    this.props.history.push('/app/entries');
+  };
 
   render() {
     const { title, content } = this.state;
+    const { loading } = this.props;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Header title="Add Entry" />
         <div className="editor">
           <div className="editor__main">
             <div className="editor__controls">
-              <OutlineButton type="button" className="outline-button--secondary px-4">
+              <OutlineButton
+                type="button"
+                className="outline-button--secondary px-4"
+                onClick={this.goToEntries}
+                disabled={loading}
+              >
                 <i className="fas fa-arrow-circle-left" />
                 <span className="ml-3">Back</span>
               </OutlineButton>
-              <OutlineButton type="button" onClick={this.onSave}>
-                <span className="mr-3">Save</span> <i className="fas fa-save" />
+              <OutlineButton type="button" disabled={loading} onClick={this.onSave}>
+                <span className="mr-3">Save</span>{' '}
+                <i className={loading ? 'fas fa-spinner fa-spin' : 'fas fa-save'} />
               </OutlineButton>
             </div>
             <div className="editor__entry">
@@ -106,7 +131,7 @@ class AddEntry extends Component<AllProps, State> {
             </div>
           </div>
           {/* <div className="editor__upload">
-            TO-DO: Enable Image Upload feature
+            #TO-DO: Enable Image Upload feature
           </div> */}
         </div>
       </div>
@@ -115,7 +140,8 @@ class AddEntry extends Component<AllProps, State> {
 }
 
 const mapStateToProps = ({ entries }: AppState) => ({
-  isLoading: getLoading(entries),
+  loading: getLoading(entries),
+  status: getStatus(entries),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

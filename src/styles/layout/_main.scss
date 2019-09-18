@@ -12,6 +12,7 @@
 
     @include responsive(sm) {
       display: flex;
+      flex-basis: auto;
     }
   }
 

@@ -5,6 +5,7 @@ export interface EntriesState {
   entries: Entry[];
   currentEntry: Entry | null;
   loading: boolean;
+  status: boolean;
 }
 
 export enum EntriesActionTypes {
