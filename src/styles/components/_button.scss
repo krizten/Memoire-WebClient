@@ -58,6 +58,17 @@
     background-color: darken($color-primary, 10%);
   }
 
+  &:disabled,
+  &[disabled] {
+    background-color: lighten($color-primary, 10%);
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus {
+      transform: none;
+    }
+  }
+
   &--primary {
     background-color: $color-primary;
 

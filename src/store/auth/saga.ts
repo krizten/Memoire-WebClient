@@ -24,11 +24,10 @@ function* signupSaga({ payload }: ReturnType<any>) {
     const { email, password } = payload;
     yield put(loginUser({ email, password }));
   } catch (err) {
+    yield put(signupUserError());
     if (err.response) {
-      yield put(signupUserError());
       notify({ message: err.response.data.error.message });
     } else {
-      yield put(signupUserError());
       notify({ message: 'Internal server error occurred.' });
     }
   }
@@ -54,11 +53,10 @@ function* loginSaga({ payload }: ReturnType<any>) {
     };
     yield put(setCurrentUser(user));
   } catch (err) {
+    yield put(signupUserError());
     if (err.response) {
-      yield put(signupUserError());
       notify({ message: err.response.data.error.message });
     } else {
-      yield put(signupUserError());
       notify({ message: 'Internal server error occurred.' });
     }
   }
@@ -71,11 +69,10 @@ function* forgotPasswordSaga({ payload }: ReturnType<any>) {
     yield put(forgotPasswordSuccess());
     notify({ message });
   } catch (err) {
+    yield put(forgotPasswordError());
     if (err.response) {
-      yield put(forgotPasswordError());
       notify({ message: err.response.data.error.message });
     } else {
-      yield put(forgotPasswordError());
       notify({ message: 'Internal server error occurred.' });
     }
   }
