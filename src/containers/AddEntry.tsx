@@ -92,7 +92,11 @@ class AddEntry extends Component<AllProps, State> {
                 <i className="fas fa-arrow-circle-left" />
                 <span className="ml-3">Back</span>
               </OutlineButton>
-              <OutlineButton type="button" disabled={loading} onClick={this.onSave}>
+              <OutlineButton
+                type="button"
+                disabled={loading || !(title && content)}
+                onClick={this.onSave}
+              >
                 <span className="mr-3">Save</span>{' '}
                 <i className={loading ? 'fas fa-spinner fa-spin' : 'fas fa-save'} />
               </OutlineButton>
