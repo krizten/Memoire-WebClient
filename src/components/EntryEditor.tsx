@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 
-import { OutlineButton } from './';
+import { OutlineButton, Button } from './';
 import { LocationSVG } from '../svg';
 import { ImageUploader } from './ImageUploader';
 import { Header } from './Header';
@@ -44,6 +44,8 @@ export class EntryEditor extends Component<Props, State> {
     };
   };
 
+  handleBack = () => {};
+
   render() {
     const { mode } = this.props;
     const { title, content } = this.state;
@@ -53,6 +55,10 @@ export class EntryEditor extends Component<Props, State> {
         <div className="editor">
           <div className="editor__main">
             <div className="editor__controls">
+              <OutlineButton type="button" className="outline-button--secondary px-4">
+                <i className="fas fa-arrow-circle-left" />
+                <span className="ml-3">Back</span>
+              </OutlineButton>
               <OutlineButton type="button" onClick={this.onSave}>
                 <span className="mr-3">Save</span> <i className="fas fa-save" />
               </OutlineButton>

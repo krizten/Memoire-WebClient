@@ -23,7 +23,7 @@
     padding: 1rem 3rem;
     border-radius: 1px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     @include responsive(sm) {
       padding: 1rem 2rem;
