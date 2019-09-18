@@ -26,7 +26,7 @@ interface PropsFromDispatch {
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
 
-class EntryEditor extends Component<AllProps, State> {
+class AddEntry extends Component<AllProps, State> {
   state: State = {
     title: '',
     content: '',
@@ -125,4 +125,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EntryEditor);
+)(AddEntry);
