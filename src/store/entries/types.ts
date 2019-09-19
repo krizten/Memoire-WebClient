@@ -16,6 +16,9 @@ export enum EntriesActionTypes {
   ADD_ENTRY = '@@entries/ADD_ENTRY',
   ADD_ENTRY_SUCCESS = '@@entries/ADD_ENTRY_SUCCESS',
   ADD_ENTRY_FAIL = '@@entries/ADD_ENTRY_FAIL',
+  EDIT_ENTRY = '@@entries/EDIT_ENTRY',
+  EDIT_ENTRY_SUCCESS = '@@entries/EDIT_ENTRY_SUCCESS',
+  EDIT_ENTRY_FAIL = '@@entries/EDIT_ENTRY_FAIL',
 }
 
 export interface AllEntries extends Action {
@@ -48,6 +51,15 @@ export interface AddEntrySuccess extends Action {
 
 export interface AddEntryFail extends Action {
   type: EntriesActionTypes.ADD_ENTRY_FAIL;
+}
+
+export interface EditEntry extends Action {
+  type: EntriesActionTypes.EDIT_ENTRY;
+  payload: { id: string; data: Partial<EntryDTO> };
+}
+
+export interface EditEntrySuccess extends Action {
+  type: EntriesActionTypes.EDIT_ENTRY_SUCCESS;
 }
 
 export type EntriesAction =
