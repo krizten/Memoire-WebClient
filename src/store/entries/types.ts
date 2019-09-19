@@ -60,6 +60,11 @@ export interface EditEntry extends Action {
 
 export interface EditEntrySuccess extends Action {
   type: EntriesActionTypes.EDIT_ENTRY_SUCCESS;
+  payload: Entry;
+}
+
+export interface EditEntryFail extends Action {
+  type: EntriesActionTypes.EDIT_ENTRY_FAIL;
 }
 
 export type EntriesAction =
@@ -69,4 +74,7 @@ export type EntriesAction =
   | SetCurrentEntry
   | AddEntry
   | AddEntrySuccess
-  | AddEntryFail;
+  | AddEntryFail
+  | EditEntry
+  | EditEntrySuccess
+  | EditEntryFail;
