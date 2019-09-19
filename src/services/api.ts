@@ -21,6 +21,6 @@ export const editEntry = async (payload: { id: string; data: Partial<EntryDTO> }
   return await axios({
     url: `/${entriesEndpoints.SINGLE_ENTRY(payload.id)}`,
     method: 'PUT',
-    data: JSON.stringify(payload.data),
+    data: payload.data,
   });
 };

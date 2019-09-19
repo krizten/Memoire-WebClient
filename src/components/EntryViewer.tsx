@@ -3,26 +3,26 @@ import React, { FunctionComponent, Fragment, MouseEventHandler } from 'react';
 import { OutlineButton, EntryViewerPlaceholder } from './';
 import { LocationSVG } from '../svg';
 import { Entry } from '../interfaces';
-import { getDayOfTheWeek, getMonthFull, getOrdinalSuffix } from '../utils';
+import { formatDate } from '../utils';
 
 interface Props {
   entry: Entry | null;
   placeholderOnClick: MouseEventHandler<any>;
+  editHandler: MouseEventHandler<any>;
 }
 
-const formatDate = (date: Date) =>
-  `${getDayOfTheWeek(date.getDay())}, ${getMonthFull(date.getMonth())} ${getOrdinalSuffix(
-    date.getDate()
-  )}, ${date.getFullYear()}`;
-
-export const EntryViewer: FunctionComponent<Props> = ({ entry, placeholderOnClick }) => {
+export const EntryViewer: FunctionComponent<Props> = ({
+  entry,
+  placeholderOnClick,
+  editHandler,
+}) => {
   const date = entry ? new Date(entry.created) : new Date();
   return (
     <div className="viewer">
       {entry ? (
         <Fragment>
           <div className="viewer__controls">
-            <OutlineButton type="button">
+            <OutlineButton type="button" onClick={editHandler}>
               <span className="mr-3">Edit</span> <i className="fas fa-edit" />
             </OutlineButton>
             <OutlineButton type="button" className="outline-button--danger">

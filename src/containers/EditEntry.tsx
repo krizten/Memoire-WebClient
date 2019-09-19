@@ -4,33 +4,50 @@ import { OutlineButton, Header } from '../components';
 import { LocationSVG } from '../svg';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { EntryDTO } from '../interfaces';
-import { addEntry } from '../store/entries/actions';
+import { EntryDTO, Entry } from '../interfaces';
+import { editEntry } from '../store/entries/actions';
 import { AppState, ConnectedReduxProps } from '../store';
-import { getLoading } from '../store/entries/selectors';
+import { getLoading, getCurrentEntry, getStatus } from '../store/entries/selectors';
 import { RouteComponentProps } from 'react-router';
+import { formatDate } from '../utils';
 
 interface State {
   title: string;
   content: string;
   image?: string;
+  date: Date;
 }
 
 interface PropsFromState {
   loading?: boolean;
+  status: boolean;
+  currentEntry: Entry | null;
 }
 
 interface PropsFromDispatch {
-  //
+  editEntry: typeof editEntry;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
 
 class EditEntry extends Component<AllProps, State> {
   state: State = {
-    title: '',
-    content: '',
+    title: this.props.currentEntry ? this.props.currentEntry.title : '',
+    content: this.props.currentEntry
+      ? this.props.currentEntry.content.replace(/\n/g, '\n\n').trim()
+      : '',
+    date: this.props.currentEntry ? new Date(this.props.currentEntry.created) : new Date(),
   };
+
+  static getDerivedStateFromProps(nextProps: AllProps, prevState: State): State {
+    const nextState = {} as State;
+
+    if (nextProps.status) {
+      nextProps.history.push('/app/entries');
+    }
+
+    return nextState;
+  }
 
   onChange = (e: any) => {
     switch (e.target.name) {
@@ -43,39 +60,58 @@ class EditEntry extends Component<AllProps, State> {
     }
   };
 
+  componentDidMount() {
+    document.title = 'Memoire | Edit Entry';
+  }
+
   onSubmit = (e: any) => {
     e.preventDefault();
   };
 
-  onSave = (e: any) => {
-    const entry: State = {
+  onUpdate = (e: any) => {
+    const { id } = this.props.match.params as any;
+    const entry: Partial<EntryDTO> = {
       title: this.state.title,
       content: this.state.content.replace(/\n{1,}\s*?\n{1,}/g, '\n').trim(),
     };
+    this.props.editEntry({ id, data: entry });
   };
 
-  handleBack = () => {};
+  goToEntries = () => {
+    this.props.history.push('/app/entries');
+  };
 
   render() {
-    const { title, content } = this.state;
+    const { title, content, date } = this.state;
+    const { loading } = this.props;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Header title="Edit Entry" />
         <div className="editor">
           <div className="editor__main">
             <div className="editor__controls">
-              <OutlineButton type="button" className="outline-button--secondary px-4">
+              <OutlineButton
+                type="button"
+                className="outline-button--secondary px-4"
+                onClick={this.goToEntries}
+                disabled={loading}
+              >
                 <i className="fas fa-arrow-circle-left" />
                 <span className="ml-3">Back</span>
               </OutlineButton>
-              <OutlineButton type="button" onClick={this.onSave}>
-                <span className="mr-3">Save</span> <i className="fas fa-save" />
+              <OutlineButton
+                type="button"
+                onClick={this.onUpdate}
+                disabled={loading || !(title && content)}
+              >
+                <span className="mr-3">Update</span>{' '}
+                <i className={loading ? 'fas fa-spinner fa-spin' : 'fas fa-save'} />
               </OutlineButton>
             </div>
             <div className="editor__entry">
               <form onSubmit={this.onSubmit} className="entry">
                 <div className="entry__date-location">
-                  <p className="entry__date">Thursday, January 22nd, 2019</p>
+                  <p className="entry__date">{formatDate(date)}</p>
                   <p className="entry__location">
                     <LocationSVG />
                     <span>{'Not Available'}</span>
@@ -115,11 +151,13 @@ class EditEntry extends Component<AllProps, State> {
 }
 
 const mapStateToProps = ({ entries }: AppState) => ({
-  isLoading: getLoading(entries),
+  loading: getLoading(entries),
+  status: getStatus(entries),
+  currentEntry: getCurrentEntry(entries),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  //
+  editEntry: (payload: { id: string; data: Partial<EntryDTO> }) => dispatch(editEntry(payload)),
 });
 
 export default connect(

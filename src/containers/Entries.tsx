@@ -62,6 +62,11 @@ class Entries extends Component<AllProps, State> {
     this.props.setCurrentEntry(entry);
   };
 
+  onEdit = () => {
+    const entryId = this.props.currentEntry && this.props.currentEntry.id;
+    this.props.history.push(`/app/entries/edit/${entryId}`);
+  };
+
   render() {
     const { search } = this.state;
     const { entries, currentEntry } = this.props;
@@ -123,7 +128,11 @@ class Entries extends Component<AllProps, State> {
           </div>
 
           <div className="entries__viewer">
-            <EntryViewer entry={currentEntry} placeholderOnClick={this.addEntry} />
+            <EntryViewer
+              entry={currentEntry}
+              placeholderOnClick={this.addEntry}
+              editHandler={this.onEdit}
+            />
           </div>
         </div>
       </div>

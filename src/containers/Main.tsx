@@ -16,7 +16,7 @@ interface Props {
 }
 
 class Main extends Component<Props, {}> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.props.getAllEntries();
   }
