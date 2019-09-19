@@ -11,6 +11,7 @@ import Landing from './Landing';
 import PrivateRoute from './PrivateRoute';
 import Main from './Main';
 import '../styles/app.scss';
+import { routes } from '../constants';
 
 export class App extends Component {
   constructor(props: any) {
@@ -27,10 +28,10 @@ export class App extends Component {
       <Router>
         <div className="app-container">
           <Switch>
-            <Route exact={true} path="/" component={Landing} />
-            <Route exact={true} path="/signup" component={Signup} />
-            <Route exact={true} path="/login" component={Login} />
-            <PrivateRoute exact={false} path="/app" component={Main} />
+            <Route exact={true} path={routes.base} component={Landing} />
+            <Route exact={true} path={routes.signup} component={Signup} />
+            <Route exact={true} path={routes.login} component={Login} />
+            <PrivateRoute exact={false} path={routes.home} component={Main} />
             <Route component={Page404} />
           </Switch>
         </div>
