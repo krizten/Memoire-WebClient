@@ -15,3 +15,9 @@ export const addEntry = (payload: EntryDTO) => action(EntriesActionTypes.ADD_ENT
 export const addEntrySuccess = (payload: Entry) =>
   action(EntriesActionTypes.ADD_ENTRY_SUCCESS, payload);
 export const addEntryError = () => action(EntriesActionTypes.ALL_ENTRIES_FAIL);
+
+export const editEntry = (payload: { id: string; data: Partial<EntryDTO> }) =>
+  action(EntriesActionTypes.EDIT_ENTRY, payload);
+export const editEntrySuccess = (payload: Entry) =>
+  action(EntriesActionTypes.EDIT_ENTRY_SUCCESS, payload);
+export const editEntryError = () => action(EntriesActionTypes.EDIT_ENTRY_FAIL);

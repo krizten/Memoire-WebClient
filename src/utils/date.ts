@@ -81,3 +81,8 @@ export const getDayOfTheWeek = (day: number) => {
 export const getOrdinalSuffix = (day: number) => {
   return `${day}${['st', 'nd', 'rd'][((((day + 90) % 100) - 10) % 10) - 1] || 'th'}`;
 };
+
+export const formatDate = (date: Date) =>
+  `${getDayOfTheWeek(date.getDay())}, ${getMonthFull(date.getMonth())} ${getOrdinalSuffix(
+    date.getDate()
+  )}, ${date.getFullYear()}`;

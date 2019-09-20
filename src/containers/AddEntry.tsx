@@ -9,6 +9,7 @@ import { addEntry } from '../store/entries/actions';
 import { AppState, ConnectedReduxProps } from '../store';
 import { getLoading, getStatus } from '../store/entries/selectors';
 import { RouteComponentProps } from 'react-router';
+import { formatDate } from '../utils';
 
 interface State {
   title: string;
@@ -63,7 +64,7 @@ class AddEntry extends Component<AllProps, State> {
   };
 
   onSave = (e: any) => {
-    const entry: State = {
+    const entry: EntryDTO = {
       title: this.state.title,
       content: this.state.content.replace(/\n{1,}\s*?\n{1,}/g, '\n').trim(),
     };
@@ -104,7 +105,7 @@ class AddEntry extends Component<AllProps, State> {
             <div className="editor__entry">
               <form onSubmit={this.onSubmit} className="entry">
                 <div className="entry__date-location">
-                  <p className="entry__date">Thursday, January 22nd, 2019</p>
+                  <p className="entry__date">{formatDate(new Date())}</p>
                   <p className="entry__location">
                     <LocationSVG />
                     <span>{'Not Available'}</span>
