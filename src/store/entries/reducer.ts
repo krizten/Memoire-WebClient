@@ -10,6 +10,8 @@ export const initialEntriesState: EntriesState = {
 
 const reducer = (state = initialEntriesState, action: EntriesAction): EntriesState => {
   switch (action.type) {
+    case EntriesActionTypes.ALL_ENTRIES:
+      return { ...state, loading: false, status: false };
     case EntriesActionTypes.ALL_ENTRIES_SUCCESS:
       return { ...state, entries: action.payload };
     case EntriesActionTypes.SET_CURRENT_ENTRY:
