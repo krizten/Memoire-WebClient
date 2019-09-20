@@ -5,7 +5,7 @@ import { LocationSVG } from '../svg';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { EntryDTO, Entry } from '../interfaces';
-import { editEntry } from '../store/entries/actions';
+import { editEntry, setCurrentEntry } from '../store/entries/actions';
 import { AppState, ConnectedReduxProps } from '../store';
 import { getLoading, getCurrentEntry, getStatus } from '../store/entries/selectors';
 import { RouteComponentProps } from 'react-router';
@@ -26,6 +26,7 @@ interface PropsFromState {
 
 interface PropsFromDispatch {
   editEntry: typeof editEntry;
+  setCurrentEntry: typeof setCurrentEntry;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
@@ -43,6 +44,12 @@ class EditEntry extends Component<AllProps, State> {
     const nextState = {} as State;
 
     if (nextProps.status) {
+      if (nextProps.currentEntry) {
+        const { currentEntry } = nextProps;
+        const { title, content } = prevState;
+        const entry: Entry = { ...currentEntry, title, content };
+        nextProps.setCurrentEntry(entry);
+      }
       nextProps.history.push('/app/entries');
     }
 
@@ -158,6 +165,7 @@ const mapStateToProps = ({ entries }: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   editEntry: (payload: { id: string; data: Partial<EntryDTO> }) => dispatch(editEntry(payload)),
+  setCurrentEntry: (payload: Entry) => dispatch(setCurrentEntry(payload)),
 });
 
 export default connect(
