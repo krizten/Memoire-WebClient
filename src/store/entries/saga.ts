@@ -12,7 +12,6 @@ import {
   editEntryError,
   editEntrySuccess,
   deleteEntrySuccess,
-  setCurrentEntry,
   deleteEntryError,
 } from './actions';
 

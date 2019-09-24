@@ -72,12 +72,12 @@ export interface EditEntryFail extends Action {
 
 export interface DeleteEntry extends Action {
   type: EntriesActionTypes.DELETE_ENTRY;
-  id: string;
+  payload: string;
 }
 
 export interface DeleteEntrySuccess extends Action {
   type: EntriesActionTypes.DELETE_ENTRY_SUCCESS;
-  id: string;
+  payload: string;
 }
 
 export interface DeleteEntryFail extends Action {

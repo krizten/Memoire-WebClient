@@ -43,7 +43,7 @@ const reducer = (state = initialEntriesState, action: EntriesAction): EntriesSta
     case EntriesActionTypes.DELETE_ENTRY_SUCCESS:
       return {
         ...state,
-        entries: removeEntry(action.id, state.entries),
+        entries: removeEntry(action.payload, state.entries),
         currentEntry: null,
         loading: false,
         status: true,
