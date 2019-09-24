@@ -24,7 +24,7 @@ interface State {
 
 interface PropsFromState {
   entries: Entry[];
-  currentEntry: Entry | null;
+  currentEntry?: Entry;
   loading: boolean;
   status: boolean;
 }

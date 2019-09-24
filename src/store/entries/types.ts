@@ -3,7 +3,7 @@ import { Entry, EntryDTO } from '../../interfaces';
 
 export interface EntriesState {
   entries: Entry[];
-  currentEntry: Entry | null;
+  currentEntry?: Entry;
   loading: boolean;
   status: boolean;
 }

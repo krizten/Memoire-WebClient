@@ -3,7 +3,7 @@ import { Entry } from '../../interfaces';
 
 export const initialEntriesState: EntriesState = {
   entries: [],
-  currentEntry: null,
+  currentEntry: undefined,
   loading: false,
   status: false,
 };
@@ -44,7 +44,7 @@ const reducer = (state = initialEntriesState, action: EntriesAction): EntriesSta
       return {
         ...state,
         entries: removeEntry(action.payload, state.entries),
-        currentEntry: null,
+        currentEntry: undefined,
         loading: false,
         status: true,
       };

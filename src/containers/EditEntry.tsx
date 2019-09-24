@@ -21,7 +21,7 @@ interface State {
 interface PropsFromState {
   loading?: boolean;
   status: boolean;
-  currentEntry: Entry | null;
+  currentEntry?: Entry;
 }
 
 interface PropsFromDispatch {

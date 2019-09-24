@@ -6,7 +6,7 @@ import { Entry } from '../interfaces';
 import { formatDate } from '../utils';
 
 interface Props {
-  entry: Entry | null;
+  entry?: Entry;
   placeholderOnClick: MouseEventHandler<any>;
   editHandler: MouseEventHandler<any>;
   deleteHandler: MouseEventHandler<any>;
