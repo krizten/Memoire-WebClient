@@ -220,6 +220,10 @@
       font-size: 1.3rem;
       color: $color-grey-light;
       font-weight: 300;
+
+      span {
+        font-weight: 800;
+      }
     }
   }
 }

@@ -7,7 +7,7 @@ import { EntrySummary, EntryViewer, Header, Dialog } from '../components';
 import { AddSVG } from '../svg';
 import { Entry } from '../interfaces';
 import { AppState, ConnectedReduxProps } from '../store';
-import { getAllEntries, getCurrentEntry } from '../store/entries/selectors';
+import { getAllEntries, getCurrentEntry, getLoading, getStatus } from '../store/entries/selectors';
 import {
   getAllEntries as getAllEntriesAction,
   setCurrentEntry,
@@ -19,11 +19,14 @@ import binIcon from '../assets/img/bin.svg';
 
 interface State {
   search: string;
+  show: boolean;
 }
 
 interface PropsFromState {
   entries: Entry[];
   currentEntry: Entry | null;
+  loading: boolean;
+  status: boolean;
 }
 
 interface PropsFromDispatch {
@@ -37,6 +40,7 @@ type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & C
 class Entries extends Component<AllProps, State> {
   state: State = {
     search: '',
+    show: false,
   };
 
   componentDidMount() {
@@ -74,15 +78,23 @@ class Entries extends Component<AllProps, State> {
   };
 
   onDelete = () => {
-    // confirm delete action through modal;
     if (this.props.currentEntry) {
       this.props.deleteEntry(this.props.currentEntry.id);
     }
+    this.setState({ show: false });
+  };
+
+  showDeleteDialog = () => {
+    this.setState({ show: true });
+  };
+
+  hideDeleteDialog = () => {
+    this.setState({ show: false });
   };
 
   render() {
-    const { search } = this.state;
-    const { entries, currentEntry } = this.props;
+    const { search, show } = this.state;
+    const { entries, currentEntry, loading, status } = this.props;
     return (
       <Fragment>
         <div className="entries">
@@ -146,27 +158,27 @@ class Entries extends Component<AllProps, State> {
                 entry={currentEntry}
                 placeholderOnClick={this.addEntry}
                 editHandler={this.onEdit}
-                deleteHandler={this.onDelete}
+                deleteHandler={this.showDeleteDialog}
               />
             </div>
           </div>
         </div>
         <Dialog
-          show={true}
+          show={(show && !loading) || (show && status)}
           title="Delete Entry"
-          processing={false}
-          disabled={false}
-          handleClose={() => {}}
+          processing={loading}
+          disabled={loading}
+          handleClose={this.hideDeleteDialog}
           cancelButtonText="Cancel"
           actionButtonText="Delete"
-          actionButtonMethod={() => {}}
+          actionButtonMethod={this.onDelete}
         >
           <div className="entries__delete-dialog">
             <div>
               <img src={binIcon} alt="Delete entry dialog image" />
             </div>
             <h3>
-              This will permanently remove this entry. Press <b>delete</b> to confirm
+              This will permanently remove this entry. Press <span>delete</span> to confirm.
             </h3>
           </div>
         </Dialog>
@@ -178,6 +190,8 @@ class Entries extends Component<AllProps, State> {
 const mapStateToProps = ({ entries }: AppState) => ({
   entries: getAllEntries(entries),
   currentEntry: getCurrentEntry(entries),
+  loading: getLoading(entries),
+  status: getStatus(entries),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -50,7 +50,6 @@ function* editEntrySaga({ payload }: ReturnType<any>) {
   try {
     const response = yield call(editEntry, payload);
     const entry: Entry = response.data.data;
-    notify({ message: response.data.summary });
     yield put(editEntrySuccess(entry));
   } catch (err) {
     yield put(editEntryError());
@@ -65,7 +64,6 @@ function* editEntrySaga({ payload }: ReturnType<any>) {
 function* deleteEntrySaga({ payload }: ReturnType<any>) {
   try {
     const response = yield call(deleteEntry, payload);
-    notify({ message: response.data.summary });
     yield put(deleteEntrySuccess(payload));
   } catch (err) {
     yield put(deleteEntryError());
