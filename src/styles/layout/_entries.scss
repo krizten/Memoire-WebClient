@@ -203,4 +203,23 @@
       }
     }
   }
+
+  &__delete-dialog {
+    display: flex;
+    align-items: center;
+
+    div {
+      margin-right: 2rem;
+
+      img {
+        width: 5rem;
+      }
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: $color-grey-light;
+      font-weight: 300;
+    }
+  }
 }
