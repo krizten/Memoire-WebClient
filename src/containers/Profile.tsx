@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-import { OutlineButton, Modal, ProfileEditor, ProfileViewer, Header } from '../components';
+import { Modal, ProfileEditor, ProfileViewer, Header } from '../components';
 import user from '../assets/img/user.png';
 
 interface Props {}

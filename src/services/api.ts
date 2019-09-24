@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { entriesEndpoints } from '../constants';
+import { entriesEndpoints, accountEndpoints } from '../constants';
 import { EntryDTO } from '../interfaces';
 
 const allEntries = async () => {
@@ -32,4 +32,11 @@ const deleteEntry = async (id: string) => {
   });
 };
 
-export { allEntries, addEntry, editEntry, deleteEntry };
+const getAccount = async () => {
+  return await axios({
+    url: `/${accountEndpoints.ACCOUNT}`,
+    method: 'GET',
+  });
+};
+
+export { allEntries, addEntry, editEntry, deleteEntry, getAccount };

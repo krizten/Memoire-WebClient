@@ -3,3 +3,4 @@ export * from './DTOs';
 export * from './user';
 export * from './token';
 export * from './coordinates';
+export * from './account';

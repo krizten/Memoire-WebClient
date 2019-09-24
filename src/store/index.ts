@@ -1,14 +1,14 @@
 import { combineReducers, Dispatch, Action, AnyAction } from 'redux';
-import { connectRouter, RouterState } from 'connected-react-router';
+import { connectRouter } from 'connected-react-router';
 import { History } from 'history';
 import { fork, all } from 'redux-saga/effects';
 
 import { AuthState } from './auth/types';
 import { authReducer } from './auth/reducer';
-import authSaga from './auth/saga';
+import authSaga from './auth/sagas';
 import { EntriesState } from './entries/types';
 import { entriesReducer } from './entries/reducer';
-import entriesSaga from './entries/saga';
+import entriesSaga from './entries/sagas';
 
 export interface AppState {
   auth: AuthState;
