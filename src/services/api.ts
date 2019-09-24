@@ -2,14 +2,14 @@ import axios from 'axios';
 import { entriesEndpoints } from '../constants';
 import { EntryDTO } from '../interfaces';
 
-export const allEntries = async () => {
+const allEntries = async () => {
   return await axios({
     url: `/${entriesEndpoints.ENTRIES}`,
     method: 'GET',
   });
 };
 
-export const addEntry = async (payload: EntryDTO) => {
+const addEntry = async (payload: EntryDTO) => {
   return await axios({
     url: `/${entriesEndpoints.ENTRIES}`,
     method: 'POST',
@@ -17,10 +17,19 @@ export const addEntry = async (payload: EntryDTO) => {
   });
 };
 
-export const editEntry = async (payload: { id: string; data: Partial<EntryDTO> }) => {
+const editEntry = async (payload: { id: string; data: Partial<EntryDTO> }) => {
   return await axios({
     url: `/${entriesEndpoints.SINGLE_ENTRY(payload.id)}`,
     method: 'PUT',
     data: payload.data,
   });
 };
+
+const deleteEntry = async (id: string) => {
+  return await axios({
+    url: `/${entriesEndpoints.SINGLE_ENTRY(id)}`,
+    method: 'DELETE',
+  });
+};
+
+export { allEntries, addEntry, editEntry, deleteEntry };

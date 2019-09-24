@@ -19,6 +19,9 @@ export enum EntriesActionTypes {
   EDIT_ENTRY = '@@entries/EDIT_ENTRY',
   EDIT_ENTRY_SUCCESS = '@@entries/EDIT_ENTRY_SUCCESS',
   EDIT_ENTRY_FAIL = '@@entries/EDIT_ENTRY_FAIL',
+  DELETE_ENTRY = '@@entries/DELETE_ENTRY',
+  DELETE_ENTRY_SUCCESS = '@@entries/DELETE_ENTRY_SUCCESS',
+  DELETE_ENTRY_FAIL = '@@entries/DELETE_ENTRY_FAIL',
 }
 
 export interface AllEntries extends Action {
@@ -67,6 +70,20 @@ export interface EditEntryFail extends Action {
   type: EntriesActionTypes.EDIT_ENTRY_FAIL;
 }
 
+export interface DeleteEntry extends Action {
+  type: EntriesActionTypes.DELETE_ENTRY;
+  payload: string;
+}
+
+export interface DeleteEntrySuccess extends Action {
+  type: EntriesActionTypes.DELETE_ENTRY_SUCCESS;
+  payload: string;
+}
+
+export interface DeleteEntryFail extends Action {
+  type: EntriesActionTypes.DELETE_ENTRY_FAIL;
+}
+
 export type EntriesAction =
   | AllEntries
   | AllEntriesSuccess
@@ -77,4 +94,7 @@ export type EntriesAction =
   | AddEntryFail
   | EditEntry
   | EditEntrySuccess
-  | EditEntryFail;
+  | EditEntryFail
+  | DeleteEntry
+  | DeleteEntrySuccess
+  | DeleteEntryFail;

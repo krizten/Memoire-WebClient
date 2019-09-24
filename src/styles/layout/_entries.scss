@@ -10,6 +10,7 @@
   }
 
   &__main {
+    height: inherit;
     flex-grow: 1;
     display: flex;
     padding: 1rem;
@@ -199,6 +200,29 @@
     &:hover {
       svg {
         fill: $color-primary-lighter;
+      }
+    }
+  }
+
+  &__delete-dialog {
+    display: flex;
+    align-items: center;
+
+    div {
+      margin-right: 2rem;
+
+      img {
+        width: 5rem;
+      }
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: $color-grey-light;
+      font-weight: 300;
+
+      span {
+        font-weight: 800;
       }
     }
   }

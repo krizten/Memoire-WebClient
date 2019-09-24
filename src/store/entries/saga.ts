@@ -2,7 +2,7 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import { notify } from '../../utils';
 import { EntriesActionTypes } from './types';
-import { allEntries, addEntry, editEntry } from '../../services';
+import { allEntries, addEntry, editEntry, deleteEntry } from '../../services';
 import { Entry } from '../../interfaces';
 import {
   getAllEntriesSuccess,
@@ -11,6 +11,8 @@ import {
   addEntryError,
   editEntryError,
   editEntrySuccess,
+  deleteEntrySuccess,
+  deleteEntryError,
 } from './actions';
 
 function* allEntriesSaga() {
@@ -48,10 +50,23 @@ function* editEntrySaga({ payload }: ReturnType<any>) {
   try {
     const response = yield call(editEntry, payload);
     const entry: Entry = response.data.data;
-    notify({ message: response.data.summary });
     yield put(editEntrySuccess(entry));
   } catch (err) {
     yield put(editEntryError());
+    if (err.response) {
+      notify({ message: err.response.data.error.message });
+    } else {
+      notify({ message: 'Internal server error occurred.' });
+    }
+  }
+}
+
+function* deleteEntrySaga({ payload }: ReturnType<any>) {
+  try {
+    const response = yield call(deleteEntry, payload);
+    yield put(deleteEntrySuccess(payload));
+  } catch (err) {
+    yield put(deleteEntryError());
     if (err.response) {
       notify({ message: err.response.data.error.message });
     } else {
@@ -64,6 +79,7 @@ function* entriesWatcherSaga() {
   yield takeLatest(EntriesActionTypes.ALL_ENTRIES, allEntriesSaga);
   yield takeLatest(EntriesActionTypes.ADD_ENTRY, addEntrySaga);
   yield takeLatest(EntriesActionTypes.EDIT_ENTRY, editEntrySaga);
+  yield takeLatest(EntriesActionTypes.DELETE_ENTRY, deleteEntrySaga);
 }
 
 function* entriesSaga() {

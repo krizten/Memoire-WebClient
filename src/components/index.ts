@@ -15,3 +15,4 @@ export * from './ProfileEditor';
 export * from './EntrySettingsTab';
 export * from './SecuritySettingsTab';
 export * from './EntryViewerPlaceholder';
+export * from './Dialog';
