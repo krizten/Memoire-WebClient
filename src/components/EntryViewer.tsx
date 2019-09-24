@@ -9,12 +9,14 @@ interface Props {
   entry: Entry | null;
   placeholderOnClick: MouseEventHandler<any>;
   editHandler: MouseEventHandler<any>;
+  deleteHandler: MouseEventHandler<any>;
 }
 
 export const EntryViewer: FunctionComponent<Props> = ({
   entry,
   placeholderOnClick,
   editHandler,
+  deleteHandler,
 }) => {
   const date = entry ? new Date(entry.created) : new Date();
   return (
@@ -25,7 +27,7 @@ export const EntryViewer: FunctionComponent<Props> = ({
             <OutlineButton type="button" onClick={editHandler}>
               <span className="mr-3">Edit</span> <i className="fas fa-edit" />
             </OutlineButton>
-            <OutlineButton type="button" className="outline-button--danger">
+            <OutlineButton type="button" className="outline-button--danger" onClick={deleteHandler}>
               <span className="mr-3">Delete</span> <i className="fas fa-trash-alt" />
             </OutlineButton>
           </div>

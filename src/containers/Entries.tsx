@@ -8,7 +8,11 @@ import { AddSVG } from '../svg';
 import { Entry } from '../interfaces';
 import { AppState, ConnectedReduxProps } from '../store';
 import { getAllEntries, getCurrentEntry } from '../store/entries/selectors';
-import { getAllEntries as getAllEntriesAction, setCurrentEntry } from '../store/entries/actions';
+import {
+  getAllEntries as getAllEntriesAction,
+  setCurrentEntry,
+  deleteEntry,
+} from '../store/entries/actions';
 import searchIcon from '../assets/img/search.svg';
 import clearIcon from '../assets/img/clear.svg';
 
@@ -24,6 +28,7 @@ interface PropsFromState {
 interface PropsFromDispatch {
   getAllEntries: typeof getAllEntriesAction;
   setCurrentEntry: typeof setCurrentEntry;
+  deleteEntry: typeof deleteEntry;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
@@ -65,6 +70,13 @@ class Entries extends Component<AllProps, State> {
   onEdit = () => {
     const entryId = this.props.currentEntry && this.props.currentEntry.id;
     this.props.history.push(`/app/entries/edit/${entryId}`);
+  };
+
+  onDelete = () => {
+    // confirm delete action through modal;
+    if (this.props.currentEntry) {
+      this.props.deleteEntry(this.props.currentEntry.id);
+    }
   };
 
   render() {
@@ -132,6 +144,7 @@ class Entries extends Component<AllProps, State> {
               entry={currentEntry}
               placeholderOnClick={this.addEntry}
               editHandler={this.onEdit}
+              deleteHandler={this.onDelete}
             />
           </div>
         </div>
@@ -148,6 +161,7 @@ const mapStateToProps = ({ entries }: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getAllEntries: () => dispatch(getAllEntriesAction()),
   setCurrentEntry: (payload: Entry) => dispatch(setCurrentEntry(payload)),
+  deleteEntry: (payload: string) => dispatch(deleteEntry(payload)),
 });
 
 export default connect(

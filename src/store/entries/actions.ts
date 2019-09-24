@@ -21,3 +21,8 @@ export const editEntry = (payload: { id: string; data: Partial<EntryDTO> }) =>
 export const editEntrySuccess = (payload: Entry) =>
   action(EntriesActionTypes.EDIT_ENTRY_SUCCESS, payload);
 export const editEntryError = () => action(EntriesActionTypes.EDIT_ENTRY_FAIL);
+
+export const deleteEntry = (id: string) => action(EntriesActionTypes.DELETE_ENTRY, id);
+export const deleteEntrySuccess = (id: string) =>
+  action(EntriesActionTypes.DELETE_ENTRY_SUCCESS, id);
+export const deleteEntryError = () => action(EntriesActionTypes.DELETE_ENTRY_FAIL);
