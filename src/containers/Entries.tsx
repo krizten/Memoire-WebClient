@@ -164,7 +164,7 @@ class Entries extends Component<AllProps, State> {
           </div>
         </div>
         <Dialog
-          show={(show && !loading) || (show && status)}
+          show={(show && !loading && !status) || (show && status && !loading)}
           title="Delete Entry"
           processing={loading}
           disabled={loading}
