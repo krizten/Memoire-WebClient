@@ -28,3 +28,5 @@ function* accountWatcherSaga() {
 function* accountSaga() {
   yield all([fork(accountWatcherSaga)]);
 }
+
+export default accountSaga;

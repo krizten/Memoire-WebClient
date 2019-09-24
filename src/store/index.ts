@@ -9,10 +9,14 @@ import authSaga from './auth/sagas';
 import { EntriesState } from './entries/types';
 import { entriesReducer } from './entries/reducer';
 import entriesSaga from './entries/sagas';
+import { AccountState } from './account/types';
+import { accountReducer } from './account/reducer';
+import accountSaga from './account/sagas';
 
 export interface AppState {
   auth: AuthState;
   entries: EntriesState;
+  account: AccountState;
 }
 
 export interface ConnectedReduxProps<A extends Action = AnyAction> {
@@ -24,8 +28,9 @@ export const createRootReducer = (history: History) =>
     router: connectRouter(history),
     auth: authReducer,
     entries: entriesReducer,
+    account: accountReducer,
   });
 
 export function* rootSaga() {
-  yield all([fork(authSaga), fork(entriesSaga)]);
+  yield all([fork(authSaga), fork(entriesSaga), fork(accountSaga)]);
 }
