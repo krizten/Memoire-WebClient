@@ -7,7 +7,7 @@ interface Props {
   email: string;
   entriesCount: number;
   dateOfBirth?: string;
-  gender?: 'male' | 'female';
+  gender?: string;
   bio?: string;
   deleteAccountHandler: MouseEventHandler<any>;
   updateAccountHandler: MouseEventHandler<any>;
@@ -55,7 +55,7 @@ export const ProfileViewer: FunctionComponent<Props> = ({
         <div className="profile-viewer__data-row profile-viewer__data-row--single">
           <div>
             <h3 className="profile-viewer__data-title">About Me</h3>
-            <p className="profile-viewer__data-content">{bio}</p>
+            <p className="profile-viewer__data-content">{bio ? bio : '...'}</p>
           </div>
         </div>
         <div className="profile-viewer__controls">

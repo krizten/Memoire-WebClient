@@ -46,7 +46,7 @@ class AddEntry extends Component<AllProps, State> {
   };
 
   componentDidMount() {
-    document.title = 'Memoire | Add Entry';
+    document.title = 'Memoire | Entry';
   }
 
   static getDerivedStateFromProps(nextProps: AllProps, prevState: State): State {

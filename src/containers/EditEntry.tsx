@@ -68,7 +68,7 @@ class EditEntry extends Component<AllProps, State> {
   };
 
   componentDidMount() {
-    document.title = 'Memoire | Edit Entry';
+    document.title = 'Memoire | Entry';
   }
 
   onSubmit = (e: any) => {

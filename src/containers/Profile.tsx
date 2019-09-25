@@ -9,6 +9,7 @@ import { AppState, ConnectedReduxProps } from '../store';
 import { getAccount } from '../store/account/selectors';
 import { Account } from '../interfaces';
 import user from '../assets/img/user.png';
+import { formatDate } from '../utils';
 
 interface State {
   showDeleteModal: boolean;
@@ -34,6 +35,7 @@ class Profile extends Component<AllProps, State> {
   };
 
   componentDidMount() {
+    document.title = 'Memoire | Profile';
     this.props.fetchAccount();
   }
 
@@ -69,20 +71,24 @@ class Profile extends Component<AllProps, State> {
 
   render() {
     const { editMode, showDeleteModal, deletePassword } = this.state;
-
-    return (
+    const { account } = this.props;
+    return account ? (
       <Fragment>
         <div className="profile">
           <Header title="Profile" />
           {!editMode ? (
             <ProfileViewer
               updateAccountHandler={this.showEditMode}
-              avatar={user}
-              fullName="Michael Richards"
-              email="michaelrichards@gmail.com"
-              entriesCount={15}
+              avatar={account.avatar}
+              fullName={account.name}
+              email={account.email}
+              entriesCount={account.entriesTillDate}
               deleteAccountHandler={this.showDeleteModal}
-              bio={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur reiciendis magni, eum atque a ab officiis laboriosam recusandae repellat alias totam quae animi quas! Laboriosam, perspiciatis sapiente unde modi aliquid eius omnis excepturi nemo totam optio officiis accusantium velit eaque ea cum sint veritatis corporis. Iure voluptatibus inventore rerum quasi`}
+              bio={account.bio ? account.bio : '...'}
+              gender={account.gender ? account.gender : undefined}
+              dateOfBirth={
+                account.dateOfBirth ? formatDate(new Date(account.dateOfBirth)) : undefined
+              }
             />
           ) : (
             <ProfileEditor
@@ -109,6 +115,8 @@ class Profile extends Component<AllProps, State> {
           processing={false}
         />
       </Fragment>
+    ) : (
+      <div>Loading</div>
     );
   }
 }

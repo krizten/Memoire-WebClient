@@ -165,7 +165,7 @@ class Entries extends Component<AllProps, State> {
         </div>
         <Dialog
           show={(show && !loading && !status) || (show && status && !loading)}
-          title="Delete Entry"
+          title="Delete Entry?"
           processing={loading}
           disabled={loading}
           handleClose={this.hideDeleteDialog}

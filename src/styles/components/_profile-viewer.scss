@@ -70,6 +70,7 @@
     align-self: flex-start;
 
     @include responsive(sm) {
+      width: 100%;
       padding: 2rem;
     }
   }
