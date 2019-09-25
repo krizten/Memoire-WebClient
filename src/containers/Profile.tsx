@@ -1,9 +1,14 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { RouteComponentProps } from 'react-router';
 
 import { Modal, ProfileEditor, ProfileViewer, Header } from '../components';
+import { fetchAccount } from '../store/account/actions';
+import { AppState, ConnectedReduxProps } from '../store';
+import { getAccount } from '../store/account/selectors';
+import { Account } from '../interfaces';
 import user from '../assets/img/user.png';
-
-interface Props {}
 
 interface State {
   showDeleteModal: boolean;
@@ -11,12 +16,26 @@ interface State {
   editMode: boolean;
 }
 
-export class Profile extends Component<Props, State> {
+interface PropsFromState {
+  account?: Account;
+}
+
+interface PropsFromDispatch {
+  fetchAccount: typeof fetchAccount;
+}
+
+type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps;
+
+class Profile extends Component<AllProps, State> {
   state: State = {
     editMode: false,
     showDeleteModal: false,
     deletePassword: '',
   };
+
+  componentDidMount() {
+    this.props.fetchAccount();
+  }
 
   showDeleteModal = () => {
     this.setState({ showDeleteModal: true });
@@ -93,3 +112,16 @@ export class Profile extends Component<Props, State> {
     );
   }
 }
+
+const mapStateToProps = ({ account }: AppState) => ({
+  account: getAccount(account),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchAccount: () => dispatch(fetchAccount()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

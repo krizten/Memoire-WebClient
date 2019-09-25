@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { Sidenav } from '../components';
-import { Profile, Settings } from './';
+import { Settings } from './';
+import { routes } from '../constants';
 import { getAllEntries } from '../store/entries/actions';
 import Entries from './Entries';
 import AddEntry from './AddEntry';
 import EditEntry from './EditEntry';
-import { routes } from '../constants';
+import Profile from './Profile';
 
 interface Props {
   getAllEntries: typeof getAllEntries;
