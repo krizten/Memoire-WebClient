@@ -1,6 +1,8 @@
 # Memoire-WebClient <img src="https://travis-ci.com/krizten/Memoire-WebClient.svg?token=NkFAritBep7j1WfW851H&branch=dev" alt="Travis" />
 Web client for Memoire app (React SPA). Memoire is an online journal where users can pen down their thoughts and feelings.
 
+UI/UX design using Figma --> [https://www.figma.com/file/f5nYuJ9NH7rHXQkCQfybFCSp/Memoire?node-id=3%3A4](https://www.figma.com/file/f5nYuJ9NH7rHXQkCQfybFCSp/Memoire?node-id=3%3A4)
+
 <p align="center">
   <img src="https://thumbs.gfycat.com/EminentUntimelyHyracotherium-max-1mb.gif" width="300" height="169" alt="Preview" />
 </p>
